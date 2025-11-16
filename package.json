@@ -6,10 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "studio:dev": "cd studio && sanity start",
+    "studio:build": "cd studio && sanity build",
+    "studio:deploy": "cd studio && sanity deploy",
     "lint": "eslint"
   },
   "dependencies": {
+    "@sanity/client": "^7.12.1",
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^4.15.0",
+    "lucide-react": "^0.553.0",
     "next": "16.0.3",
+    "next-sanity": "^11.6.6",
+    "phosphor-react": "^1.4.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
