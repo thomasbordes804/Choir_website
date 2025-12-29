@@ -8,8 +8,9 @@ import { structure } from './sanity/structure'
 export default defineConfig({
   name: 'churchChoirStudio',
   title: 'Church Choir Studio',
+  basePath: '/studio',
 
-  projectId: 'pbsm0i27',
+  projectId: '3j1hq2pe',
   dataset: 'production',
 
   plugins: [
@@ -23,3 +24,4 @@ export default defineConfig({
     types: schemaTypes,
   },
 })
+

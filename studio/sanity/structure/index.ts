@@ -14,9 +14,11 @@ import {
   UserCircle,
   Megaphone,
   MegaphoneSimple,
-  Image,
+    Image,
   ImageSquare,
+  BookOpen,
 } from 'phosphor-react'
+
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -31,7 +33,7 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title('General')
             .items([
-              S.listItem()
+                            S.listItem()
                 .title('Site Settings')
                 .icon(Gear)
                 .child(
@@ -40,14 +42,27 @@ export const structure: StructureResolver = (S) =>
                     .documentId('siteSettings')
                 ),
 
-              S.documentTypeListItem('page')
+                            S.documentTypeListItem('page')
                 .title('Pages')
                 .icon(FileText),
+
+
+
             ])
+        ),
+
+            // --- BIOGRAPHY ---
+      S.listItem()
+        .title('Biography')
+        .icon(BookOpen)
+        .child(
+          S.documentTypeList('biographyTopic')
+            .title('Chapitres de biographie')
         ),
 
       // --- PLANNING ---
       S.listItem()
+
         .title('Planning')
         .icon(Calendar)
         .child(

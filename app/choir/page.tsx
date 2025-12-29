@@ -1,46 +1,81 @@
-import React from "react"
-import config from "../../studio/sanity.config"
+import type { Metadata } from "next";
+import Image from "next/image";
 
-type Member = { _id: string; name?: string; role?: string; imageUrl?: string }
+import { PageShell } from "@/components/layout/page-shell";
+import { EmptyState } from "@/components/ui/empty-state";
+import { getChoirMembers } from "@/lib/sanity/queries";
 
-async function fetchChoirMembers(): Promise<Member[]> {
-  const query = encodeURIComponent(`*[_type == "choirMember"]{_id, name, role, "imageUrl": image.asset->url}`)
-  const url = `https://${config.projectId}.api.sanity.io/v2021-10-21/data/query/${config.dataset}?query=${query}`
-  const res = await fetch(url)
-  if (!res.ok) return []
-  const json = await res.json()
-  return (json.result ?? []) as Member[]
-}
+export const metadata: Metadata = {
+  title: "Choir",
+  description: "Explore the voices, sections, and roles within the choir.",
+};
+
+const getInitials = (name: string | null) => {
+  if (!name) return "CC";
+  const matches = name
+    .split(" ")
+    .filter(Boolean)
+    .map((segment) => segment[0]?.toUpperCase())
+    .slice(0, 2)
+    .join("");
+
+  return matches.length > 0 ? matches : "CC";
+};
 
 export default async function ChoirPage() {
-  const members = await fetchChoirMembers()
+  const members = await getChoirMembers();
+
+    if (members.length === 0) {
+    return (
+      <PageShell
+        eyebrow="Ensemble"
+        title="Choir Members"
+        description="Once members have been added in the studio they will appear here with their section and role information."
+      >
+        <EmptyState
+          title="No choir members yet"
+          description="Add profiles in the Sanity Studio to celebrate the people behind the harmonies."
+        />
+      </PageShell>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black font-sans">
-      <main className="mx-auto max-w-3xl py-16 px-6">
-        <h1 className="text-2xl font-semibold mb-6 text-black dark:text-zinc-50">Choir Members</h1>
-
-        {members.length === 0 ? (
-          <p className="text-zinc-600 dark:text-zinc-400">No choir members found.</p>
-        ) : (
-          <ul className="grid gap-4">
-            {members.map((m) => (
-              <li key={m._id} className="flex items-center gap-4 rounded-md border bg-white p-4 dark:bg-[#0b0b0b] dark:border-white/10">
-                {m.imageUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={m.imageUrl} alt={m.name ?? "choir member"} width={64} height={64} className="h-16 w-16 rounded-md object-cover" />
-                ) : (
-                  <div className="h-16 w-16 rounded-md bg-zinc-100 dark:bg-zinc-800" />
-                )}
-                <div>
-                  <div className="font-medium text-black dark:text-zinc-50">{m.name ?? "Unnamed"}</div>
-                  {m.role && <div className="text-sm text-zinc-600 dark:text-zinc-400">{m.role}</div>}
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </main>
-    </div>
-  )
+    <PageShell
+      eyebrow="Ensemble"
+      title="Choir Members"
+      description="Meet the cantors, sopranos, altos, tenors, and basses who shape the choir’s sound."
+    >
+      <ul className="grid gap-5 sm:grid-cols-2">
+        {members.map((member) => (
+          <li
+            key={member._id}
+            className="relative flex items-center gap-4 overflow-hidden rounded-3xl border border-white/50 bg-white/80 p-5 shadow-md shadow-indigo-500/10 transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-[rgba(15,23,42,0.6)]"
+          >
+            <div
+              className="absolute inset-0 -z-10 bg-gradient-to-br from-white/40 via-transparent to-indigo-200/30 dark:from-indigo-500/20 dark:via-transparent dark:to-slate-900/30"
+              aria-hidden
+            />
+            {member.image ? (
+              <Image
+                src={member.image.url}
+                width={member.image.width ?? 64}
+                height={member.image.height ?? 64}
+                alt={member.name ?? "Choir member"}
+                className="h-16 w-16 rounded-xl object-cover"
+              />
+            ) : (
+              <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-[color:var(--muted)] text-base font-semibold uppercase tracking-wide text-[color:var(--muted-foreground)]">
+                {getInitials(member.name)}
+              </div>
+            )}
+            <div className="space-y-1">
+                            <p className="text-base font-semibold text-zinc-900 dark:text-zinc-100">{member.name ?? "Unnamed member"}</p>
+              <p className="text-sm text-zinc-600 dark:text-zinc-300">{member.role ?? "Role to be announced"}</p>
+                        </div>
+          </li>
+        ))}
+      </ul>
+    </PageShell>
+  );
 }
