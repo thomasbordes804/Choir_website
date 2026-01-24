@@ -1,0 +1,726 @@
+[
+  {
+    "slug": "organist",
+    "title": "Michel Hilger à l'orgue",
+    "description": "Met en lumière son jeu d'organiste, reliant liturgie, improvisation et répertoires contemporains.",
+    "order": 2,
+    "content": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "A l'occasion de nombreux événements, Michel Hilger exerce ses talents d'organiste."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "markDefs": [
+          {
+            "_type": "link",
+            "_key": "link_organist1",
+            "href": "https://www.catholique-creteil.cef.fr/"
+          },
+          {
+            "_type": "link",
+            "_key": "link_organist2",
+            "href": "https://www.acip.org/"
+          }
+        ],
+        "children": [
+          {
+            "_type": "span",
+            "text": "Michel Hilger est contractuellement organiste liturgique sur Paris et la région parisienne notamment au "
+          },
+          {
+            "_type": "span",
+            "marks": ["link_organist1"],
+            "text": "Diocèse de Créteil"
+          },
+          {
+            "_type": "span",
+            "text": " à la cathédrale Notre-Dame de Créteil, à l'Église Saint-Saturnin de Champigny-sur-Marne ainsi qu'au "
+          },
+          {
+            "_type": "span",
+            "marks": ["link_organist2"],
+            "text": "Consistoire Israélite de Paris (ACIP)"
+          },
+          {
+            "_type": "span",
+            "text": "."
+          }
+        ]
+      }
+    ],
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=TkuqzemCTtk",
+        "title": "Improvisations à l'orgue par Michel Hilger (diaporama musical)"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=koForgHzbdA",
+        "title": "Diaporama musical d'improvisations à l'orgue par Michel Hilger"
+      }
+    ],
+    "imageUrls": [
+      "https://www.artsparadise.net/assets/pictures/organist/-3292763027898673372.thumb.webp"
+    ]
+  },
+  {
+    "slug": "organ",
+    "title": "Restauration d'orgues avec Art au Pluriel",
+    "description": "Retrace le travail mené aux côtés du collectif Art au Pluriel pour redonner voix à des instruments historiques.",
+    "order": 3,
+    "content": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Liés à la société Art au Pluriel et organistes passionnés par l'organologie et la restauration d'instruments anciens ou laissés à l'abandon Jean-Luc Navarre et Michel Hilger se mobilisent pour des apporter l'optimisation des orgues pour des coûts raisonnables et par le biais d'organisations de concerts et présentations pédagogiques. N'hésitez pas à les joindre."
+          }
+        ]
+      }
+    ],
+    "imageUrls": [
+      "https://www.artsparadise.net/assets/pictures/organ/-3292763027898673372%20(1).thumb.webp"
+    ]
+  },
+  {
+    "slug": "cv",
+    "title": "Curriculum Vitae",
+    "description": "Détaille un parcours jalonné d'études, de rencontres et de créations marquantes.",
+    "order": 5,
+    "content": [
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Michel Hilger, l'Altiste-Peintre ou l'Art au Pluriel"
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "markDefs": [
+          {
+            "_type": "link",
+            "_key": "link_cv1",
+            "href": "https://www.ephe.psl.eu/"
+          }
+        ],
+        "children": [
+          {
+            "_type": "span",
+            "text": "Entre la musique et les autres formes d'expression de l'Art, il existe des affinités que Michel Hilger a saisi depuis son plus jeune âge et son imagination créatrice est débordante. Né en 1966, il obtient de nombreux Premiers Prix, suite à ses études supérieures à Paris de musique (alto, musique de chambre, écriture, musicologie, direction d'orchestre), de beaux-arts puis universitaires à l'"
+          },
+          {
+            "_type": "span",
+            "marks": ["link_cv1"],
+            "text": "École Pratique des Hautes Études de Paris"
+          },
+          {
+            "_type": "span",
+            "text": "."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "markDefs": [
+          {
+            "_type": "link",
+            "_key": "link_cv2",
+            "href": "https://www.gendarmerie.interieur.gouv.fr/"
+          },
+          {
+            "_type": "link",
+            "_key": "link_cv3",
+            "href": "https://www.conservatoire-metz.fr/"
+          },
+          {
+            "_type": "link",
+            "_key": "link_cv4",
+            "href": "https://www.orchestre-pasdeloup.fr/"
+          },
+          {
+            "_type": "link",
+            "_key": "link_cv5",
+            "href": "https://www.conservatoiredeparis.fr/"
+          }
+        ],
+        "children": [
+          {
+            "_type": "span",
+            "text": "L'artiste atypique remporte dès 18 ans le concours d'entrée et de sélection pour devenir altiste dans l'orchestre de "
+          },
+          {
+            "_type": "span",
+            "marks": ["link_cv2"],
+            "text": "la Garde Républicaine de Paris"
+          },
+          {
+            "_type": "span",
+            "text": " puis il est nommé très rapidement professeur d'alto au "
+          },
+          {
+            "_type": "span",
+            "marks": ["link_cv3"],
+            "text": "Conservatoire National de Région de Metz"
+          },
+          {
+            "_type": "span",
+            "text": " tout d'abord, puis en région parisienne. Dès lors sa carrière commence à plein régime et depuis ce temps, il ne cesse de jouer régulièrement au sein de formations orchestrales réputées par exemple "
+          },
+          {
+            "_type": "span",
+            "marks": ["link_cv4"],
+            "text": "l'Orchestre des concerts Pasdeloup"
+          },
+          {
+            "_type": "span",
+            "text": ", l'Orchestre du Marais, l'Ensemble Polyphanie, l'Orchestre Lyrique de Paris, participant ainsi à de nombreux concerts, festivals, enregistrements ou créations contemporaines dans le cadre du "
+          },
+          {
+            "_type": "span",
+            "marks": ["link_cv5"],
+            "text": "Conservatoire National Supérieur de Musique de Paris"
+          },
+          {
+            "_type": "span",
+            "text": ", l'École de Polytechnique pour Radio France, avec l'IRCAM de Pierre Boulez, avec l'ensemble 2E2M, mais aussi des musiques de Roger Boutry, Michel Legrand, Pierre Estève, Jean Sichler pour ne citer qu'eux."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Cependant en tant que musicien, «l'altiste de vocation» comme aimait à l'appeler son maître Bruno Pasquier, a toujours privilégie la musique de chambre, surtout là où en particulier, il peut faire entendre la voix de «son cher complice» lors de très nombreux concerts aussi bien en France qu'à l'étranger. Tout en ayant très à cœur de tenir ses engagements de pédagogue et de chef de chœur, l'artiste atypique développe sa carrière de peintre et expose régulièrement (Salon des Indépendants, Salon d'art sacré de Paris, Salon de la Société Nationale des Beaux Arts,...). Michel est marié, et avec sa femme Florence ils ont quatre garçons. Sa vie ressemble à un "
+          },
+          {
+            "_type": "span",
+            "marks": ["em"],
+            "text": "Thème et Variations"
+          },
+          {
+            "_type": "span",
+            "text": " basé sur la "
+          },
+          {
+            "_type": "span",
+            "marks": ["em"],
+            "text": "Louange"
+          },
+          {
+            "_type": "span",
+            "text": " et la "
+          },
+          {
+            "_type": "span",
+            "marks": ["em"],
+            "text": "Foi"
+          },
+          {
+            "_type": "span",
+            "text": " malgré les difficultés du présent."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "markDefs": [
+          {
+            "_type": "link",
+            "_key": "link_cv6",
+            "href": "https://www.academie-des-arts-thiais.fr/"
+          }
+        ],
+        "children": [
+          {
+            "_type": "span",
+            "text": "Aujourd'hui il est toujours l'altiste et fondateur du Quintette de France (cordes et piano) et du Quintette à cordes franco-polonais, professeur émérite de dessin-peinture-sculpture à "
+          },
+          {
+            "_type": "span",
+            "marks": ["link_cv6"],
+            "text": "l'Académie des Arts de Thiais"
+          },
+          {
+            "_type": "span",
+            "text": " (après plus de 30 ans en tant que fondateur et professeur des cours de dessin, peinture, modelage et sculpture), chef de choeur permanent et directeur artistique de festivals. Également compositeur, arrangeur et poète, il est lauréat de plusieurs prix internationaux dans les trois disciplines artistiques qu'il aborde citons par exemple, le Grand Prix International de poésie de la ville d'Avignon, médaille d'or avec les félicitations du jury au grand concours de composition de l'Académie internationale de Lutèce ou bien la médaille "
+          },
+          {
+            "_type": "span",
+            "marks": ["em"],
+            "text": "grand or"
+          },
+          {
+            "_type": "span",
+            "text": " de la Société Francaise d'encouragement l'Élite\"."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Explorant la \"noble alliance\" qui apparente la musique, la poésie et la peinture, Michel Hilger aborde ses activités professionnelles artistiques de manière romantique, passionnée et colorée. Alors nous pouvons contempler ses peintures plus auditives que rétiniennes, lire ses textes et l'écouter poétiser avec son alto, au piano ou avec ses amis musiciens ou choristes. \"Lorsque je peins, j'entends de la musique et lorsque je joue de l'alto, compose ou improvise, je vois des couleurs\" nous explique-t-il."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "markDefs": [
+          {
+            "_type": "link",
+            "_key": "link_cv7",
+            "href": "https://www.guide-mayer.com/"
+          }
+        ],
+        "children": [
+          {
+            "_type": "span",
+            "text": "Comme la musique, les couleurs ou les mots vibrent selon des modulations, des rythmes qui vont du "
+          },
+          {
+            "_type": "span",
+            "marks": ["em"],
+            "text": "forte"
+          },
+          {
+            "_type": "span",
+            "text": " au "
+          },
+          {
+            "_type": "span",
+            "marks": ["em"],
+            "text": "pianissimo"
+          },
+          {
+            "_type": "span",
+            "text": ", du \""
+          },
+          {
+            "_type": "span",
+            "marks": ["em"],
+            "text": "staccato"
+          },
+          {
+            "_type": "span",
+            "text": "\" au "
+          },
+          {
+            "_type": "span",
+            "marks": ["em"],
+            "text": "legato"
+          },
+          {
+            "_type": "span",
+            "text": " et Michel Hilger cherche toujours à tirer le maximum de dégradés en vue d'apporter l'élévation de l'âme et d'amener à un sentiment de réconfort et de la bienveillance fédérateurs. L'artiste, côté au "
+          },
+          {
+            "_type": "span",
+            "marks": ["link_cv7"],
+            "text": "guide Mayer"
+          },
+          {
+            "_type": "span",
+            "text": " en tant que Peintre, est médaillé de la ville de Paris pour toutes ses activités et ses productions artistiques."
+          }
+        ]
+      }
+    ],
+    "subsections": [
+      {
+        "title": "Etudes",
+        "slug": "studies",
+        "content": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_type": "link",
+                "_key": "link_studies1",
+                "href": "https://www.ephe.psl.eu/"
+              }
+            ],
+            "children": [
+              {
+                "_type": "span",
+                "text": "Études universitaires à l'"
+              },
+              {
+                "_type": "span",
+                "marks": ["link_studies1"],
+                "text": "École Pratique des Hautes Études de Paris"
+              },
+              {
+                "_type": "span",
+                "text": ", section Histoire et Philologie, sous la direction de François Lesure (1988-1989)."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Formation en alto et études théoriques (solfège, déchiffrage, harmonie, écriture, analyse musicale, histoire de la musique, organologie, musique de chambre) aux Conservatoires Nationaux de Région de Saint-Maur et d'Aubervilliers-La Courneuve, avec obtention de Prix Supérieurs."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Cycle complet de formation des professeurs en dessin, peinture et modelage à l'École d'Art Martenot de Paris."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Formation en psychopédagogie avec Didier Lazard, professeur à l'Institut des Études Politiques de Paris."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Participation à des stages internationaux d'alto et de direction d'orchestre à Nice et Vannes."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_type": "link",
+                "_key": "link_studies2",
+                "href": "https://www.conservatoiredeparis.fr/"
+              }
+            ],
+            "children": [
+              {
+                "_type": "span",
+                "text": "Études de composition et d'orchestration dans la classe de Roger Boutry au "
+              },
+              {
+                "_type": "span",
+                "marks": ["link_studies2"],
+                "text": "Conservatoire National Supérieur de Musique de Paris"
+              },
+              {
+                "_type": "span",
+                "text": " en 1989."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Expériences professionnelles",
+        "slug": "professional-experience",
+        "content": [
+          {
+            "_type": "block",
+            "style": "h3",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Actuellement :"
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Altiste et fondateur du \"Quintette de France\" (cordes et piano depuis 1989) et de l'\"Ensemble Franco-Polonais\" (depuis 2006), avec des concerts, tournées et animations musicales."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_type": "link",
+                "_key": "link_prof1",
+                "href": "https://www.orchestre-pasdeloup.fr/"
+              },
+              {
+                "_type": "link",
+                "_key": "link_prof2",
+                "href": "https://www.acip.org/"
+              }
+            ],
+            "children": [
+              {
+                "_type": "span",
+                "text": "Membre de l'"
+              },
+              {
+                "_type": "span",
+                "marks": ["link_prof1"],
+                "text": "Orchestre Pasdeloup"
+              },
+              {
+                "_type": "span",
+                "text": " (depuis 1999), de l'Octuor Georges Onslow (depuis 2001), de l'Orchestre Lyrique Français (depuis 1999), du "
+              },
+              {
+                "_type": "span",
+                "marks": ["link_prof2"],
+                "text": "Consistoire Israélite de Paris"
+              },
+              {
+                "_type": "span",
+                "text": " (depuis 1988) et de l'Orchestre de Chambre d'Île-de-France (depuis 2014)."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Nombreux concerts de musique de chambre (trio, quatuor, quintette, octuor depuis 1984) en France et à l'étranger, tournées, animations scolaires, festivals d'été en récitals de soliste ou dans des programmes \"Orgue et Alto\" (notamment avec Carolyn Shuster et Dominique Aubert)."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Réalisation et enregistrements de CD, de musiques de publicités, pour le cinéma, pour la scène, en soliste ou avec ses formations de musique de chambre instrumentales ou chorales."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Auteur de thèses sur \"les Quintettes en France\", d'articles de musicologie, d'histoire de l'art, de pochettes de CD, de nombreux poèmes édités et primés, ainsi que du livre \"La mort attendra\" (Éditions Belfond)."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_type": "link",
+                "_key": "link_prof3",
+                "href": "https://www.academie-des-arts-thiais.fr/"
+              }
+            ],
+            "children": [
+              {
+                "_type": "span",
+                "text": "Professeur émérite (et fondateur des cours) d'arts plastiques (dessin, peinture, sculpture, modelage, préparation aux options artistiques du bac et concours d'entrées en établissements supérieurs spécialisés) à l'"
+              },
+              {
+                "_type": "span",
+                "marks": ["link_prof3"],
+                "text": "Académie des Arts de Thiais"
+              },
+              {
+                "_type": "span",
+                "text": " (après plus de 30 ans d'activité)."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Directeur artistique de plusieurs festivals, notamment des \"Nuits Romanes\" et des \"Nuits en Russie\"."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_type": "link",
+                "_key": "link_prof4",
+                "href": "https://www.guide-mayer.com/"
+              }
+            ],
+            "children": [
+              {
+                "_type": "span",
+                "text": "Peintre coté au \""
+              },
+              {
+                "_type": "span",
+                "marks": ["link_prof4"],
+                "text": "Guide Meyer"
+              },
+              {
+                "_type": "span",
+                "text": "\", avec des créations et expositions régulières (galeries, ventes à Drouot, etc.), réalisant des peintures à l'huile, sur clavecins, des illustrations pour livres, affiches, étiquettes (grands crus, parfums, etc.)."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Fondateur des sociétés \"Hilger-Art Au Pluriel\" (1999) et \"Artistique-Avenue.Com\" (2005)."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "h3",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Expériences professionnelles passées :"
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "markDefs": [
+              {
+                "_type": "link",
+                "_key": "link_prof5",
+                "href": "https://www.conservatoire-metz.fr/"
+              },
+              {
+                "_type": "link",
+                "_key": "link_prof6",
+                "href": "https://www.gendarmerie.interieur.gouv.fr/"
+              }
+            ],
+            "children": [
+              {
+                "_type": "span",
+                "text": "Professeur d'alto au "
+              },
+              {
+                "_type": "span",
+                "marks": ["link_prof5"],
+                "text": "Conservatoire National de Région de Metz"
+              },
+              {
+                "_type": "span",
+                "text": " et en région parisienne."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Altiste dans l'"
+              },
+              {
+                "_type": "span",
+                "marks": ["link_prof6"],
+                "text": "Orchestre de la Garde Républicaine de Paris"
+              },
+              {
+                "_type": "span",
+                "text": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Liste d'expositions de peintures de Michel Hilger",
+        "slug": "painting-exhibits",
+        "content": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Les expositions de peintures de Michel Hilger seront bientôt listées ici."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Distinctions musicales",
+        "slug": "music-awards",
+        "content": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Les distinctions musicales de Michel Hilger seront bientôt listées ici."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Prix en poésie",
+        "slug": "poetry-awards",
+        "content": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Les prix en poésie de Michel Hilger seront bientôt listés ici."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

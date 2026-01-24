@@ -2,24 +2,26 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { PageShell } from "@/components/layout/page-shell";
-import { EmptyState } from "@/components/ui/empty-state";
 import {
   getEvents,
   getHighlightedAnnouncements,
   getSiteSettings,
   getSummaryCounts,
 } from "@/lib/sanity/queries";
+import { VideoBackground } from "@/components/ui/video-background";
+import { CloudTransition } from "@/components/ui/cloud-transition";
+import { TopVideoTemplate } from "@/components/ui/top-video-template";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Accueil",
+  description: "Bienvenue dans l'univers artistique de Michel Hilger",
 };
 
-const announcementDateFormatter = new Intl.DateTimeFormat("en-GB", {
+const announcementDateFormatter = new Intl.DateTimeFormat("fr-FR", {
   dateStyle: "long",
 });
 
-const eventDateFormatter = new Intl.DateTimeFormat("en-GB", {
+const eventDateFormatter = new Intl.DateTimeFormat("fr-FR", {
   dateStyle: "long",
   timeStyle: "short",
 });
@@ -37,332 +39,298 @@ export default async function Home() {
     getEvents(3),
   ]);
 
-  const heroTitle = siteSettings?.homepageHeroTitle ?? "Voices that lift the spirit";
+  const heroTitle = siteSettings?.homepageHeroTitle ?? "ArtsParadise";
   const heroSubtitle =
     siteSettings?.homepageHeroSubtitle ??
-    "Experience the warmth of a community united in worship and song.";
-  const heroTagline = siteSettings?.tagline ?? "Sacred harmonies every Sunday";
+    "Altiste-peintre et musicien au service des communautés";
+  const heroTagline = siteSettings?.tagline ?? "L'art au service de l'harmonie";
 
-  const navigationBoard = [
+  // Sections avec leurs couleurs minimalistes - matching navigation bar
+  const sections = [
     {
-      title: "Actuality",
+      title: "Actualités",
       href: "/actuality",
-      description: "Catch up on highlights, announcements, and choir life moments.",
-      accent: "from-purple-500/80 via-violet-500/80 to-indigo-500/80",
+      description: "Découvrez les dernières nouvelles",
       count: highlights.length,
-      label: highlights.length === 1 ? "update" : "updates",
+      label: highlights.length === 1 ? "actualité" : "actualités",
+      image: "/showcase/actualité/actualités_2.jpg", // Add your image path here
     },
     {
-      title: "Biography",
+      title: "Œuvres",
+      href: "/works",
+      description: "Peintures, sculptures et créations",
+      image: "/showcase/oeuvres/oeuvres.jpg", // Add your image path here
+    },
+    {
+      title: "Biographie",
       href: "/biography",
-      description: "Discover the story and mission that guide our ensemble.",
-      accent: "from-cyan-400/80 via-sky-400/80 to-blue-500/80",
+      description: "Explorez le parcours artistique",
+      image: "/showcase/biographie/biographie.jpg", // Add your image path here
     },
     {
-      title: "Songs",
-      href: "/songs",
-      description: "Browse psalms, hymns, and anthems from our repertoire.",
-      accent: "from-amber-400/80 via-orange-400/80 to-pink-500/80",
-      count: counts.songCount,
-      label: counts.songCount === 1 ? "song" : "songs",
+      title: "Communication",
+      href: "/communication",
+      description: "Médias et événements",
+      image: "/showcase/communication/communication.jpg", // Add your image path here
     },
     {
-      title: "Events",
-      href: "/events",
-      description: "Keep track of liturgies, concerts, and rehearsals ahead.",
-      accent: "from-emerald-400/80 via-teal-400/80 to-cyan-500/80",
-      count: counts.eventCount,
-      label: counts.eventCount === 1 ? "event" : "events",
+      title: "Partenariat",
+      href: "/partenariat",
+      description: "Collaborations et partenaires",
+      image: "/showcase/partenariat/partenariat.jpg", // Add your image path here
     },
     {
-      title: "Choir Members",
-      href: "/choir",
-      description: "Get to know the voices who bring colour to every hymn.",
-      accent: "from-rose-400/80 via-purple-400/80 to-indigo-500/80",
-      count: counts.choirCount,
-      label: counts.choirCount === 1 ? "member" : "members",
+      title: "Contact",
+      href: "/contact",
+      description: "Prenez contact avec nous",
+      image: "/showcase/contact/contact.jpg", // Add your image path here
     },
     {
-      title: "Studio",
-      href: "/studio",
-      description: "Manage content, repertoire, and announcements in Sanity Studio.",
-      accent: "from-slate-400/80 via-slate-500/80 to-slate-600/80",
+      title: "Archive",
+      href: "/archive",
+      description: "Documents et archives",
+      image: "/showcase/archive/archive.jpg", // Add your image path here
     },
   ];
 
   const featuredEvent = siteSettings?.featuredEvent ?? upcomingEvents[0] ?? null;
-  const secondaryEvents = featuredEvent
-    ? upcomingEvents.filter((event) => event._id !== featuredEvent._id)
-    : upcomingEvents.slice(1);
 
   return (
-    <div className="relative">
-      <section className="relative mx-auto max-w-6xl px-6 pt-24 lg:px-8">
-        <div className="relative overflow-hidden rounded-[34px] border border-white/40 bg-white/75 px-8 py-14 shadow-2xl shadow-indigo-500/20 backdrop-blur-md dark:border-white/10 dark:bg-[rgba(15,23,42,0.72)]">
-          <div
-            className="absolute inset-0 -z-10 bg-gradient-to-br from-indigo-200/60 via-transparent to-purple-300/50 opacity-80 dark:from-indigo-500/30 dark:to-sky-500/20"
-            aria-hidden
-          />
-          <div className="grid gap-12 lg:grid-cols-[1fr,0.85fr] lg:items-center">
-            <div className="space-y-8 text-zinc-900 dark:text-zinc-100">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/60 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-indigo-700 shadow-sm shadow-indigo-200/60 dark:bg-indigo-500/20 dark:text-indigo-200">
-                {heroTagline}
-              </span>
-              <div className="space-y-5">
-                <h1 className="text-4xl font-semibold leading-tight tracking-tight text-zinc-900 sm:text-5xl dark:text-white">
-                  {heroTitle}
-                </h1>
-                <p className="max-w-2xl text-lg text-zinc-700 dark:text-zinc-200">
-                  {heroSubtitle}
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-4">
-                <Link
-                  href="/actuality"
-                  className="inline-flex items-center gap-2 rounded-full bg-[color:var(--accent)] px-6 py-2.5 text-sm font-semibold text-[color:var(--accent-foreground)] shadow-lg shadow-[color:var(--accent)]/30 transition hover:scale-[1.02]"
-                >
-                  Stay informed
-                  <span aria-hidden>&rarr;</span>
-                </Link>
-                <Link
-                  href="/events"
-                  className="inline-flex items-center gap-2 rounded-full border border-[color:var(--accent)]/30 px-6 py-2.5 text-sm font-semibold text-[color:var(--accent)] transition hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)]/10"
-                >
-                  Upcoming events
-                </Link>
-              </div>
-              <dl className="grid gap-6 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/60 bg-white/70 px-4 py-5 text-center shadow-sm dark:border-white/10 dark:bg-white/5">
-                  <dt className="text-xs font-medium uppercase tracking-[0.25em] text-indigo-500">Voices</dt>
-                  <dd className="mt-3 text-3xl font-semibold text-zinc-900 dark:text-white">{counts.choirCount}</dd>
-                </div>
-                <div className="rounded-2xl border border-white/60 bg-white/70 px-4 py-5 text-center shadow-sm dark:border-white/10 dark:bg-white/5">
-                  <dt className="text-xs font-medium uppercase tracking-[0.25em] text-indigo-500">Repertoire</dt>
-                  <dd className="mt-3 text-3xl font-semibold text-zinc-900 dark:text-white">{counts.songCount}</dd>
-                </div>
-                <div className="rounded-2xl border border-white/60 bg-white/70 px-4 py-5 text-center shadow-sm dark:border-white/10 dark:bg-white/5">
-                  <dt className="text-xs font-medium uppercase tracking-[0.25em] text-indigo-500">Engagements</dt>
-                  <dd className="mt-3 text-3xl font-semibold text-zinc-900 dark:text-white">{counts.eventCount}</dd>
-                </div>
-              </dl>
+    <div className="relative overflow-hidden bg-[#edeae6]">
+      {/* Cloud transition overlay */}
+      <CloudTransition />
+      
+      {/* Hero Section with home_page animated video background - BOYD inspired minimal */}
+      <section className="relative min-h-screen flex items-center justify-center px-6 lg:px-8 overflow-hidden">
+        <TopVideoTemplate videoSrc="/home_page/clouds.mp4" />
+        
+        {/* Enhanced overlay for text readability */}
+        <div className="absolute inset-0 bg-black/30 z-10" />
+        
+        {/* Additional gradient overlay at top for text visibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent z-11" />
+        
+        <div className="relative z-20 max-w-7xl w-full pt-32 sm:pt-40">
+          {/* Main Hero Content */}
+          <div className="text-center mb-20">
+            {/* Tagline - more visible */}
+            <div className="mb-12 text-2xl sm:text-3xl md:text-4xl tracking-[0.2em] uppercase text-white font-light leading-relaxed drop-shadow-lg" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0, 0, 0, 0.3)' }}>
+              {heroTagline}
             </div>
-            <div className="relative flex h-80 items-center justify-center">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-400/30 via-purple-400/20 to-sky-400/40 blur-3xl" aria-hidden />
-              {siteSettings?.homepageHeroImage ? (
-                <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/50 shadow-xl shadow-indigo-500/20">
-                  <Image
-                    src={siteSettings.homepageHeroImage.url}
-                    alt={siteSettings?.churchName ?? "Choir rehearsal"}
-                    fill
-                    sizes="(min-width: 1024px) 420px, 100vw"
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              ) : (
-                <div className="relative flex h-full w-full items-center justify-center rounded-3xl border border-white/40 bg-gradient-to-br from-indigo-400/70 via-purple-400/70 to-sky-500/70 shadow-xl shadow-indigo-500/30">
-                  <div className="text-center text-white">
-                    <p className="text-sm uppercase tracking-[0.35em] text-white/70">Resonance</p>
-                    <p className="mt-4 text-3xl font-semibold">Where voices meet</p>
-                  </div>
-                </div>
-              )}
-            </div>
+            
+            {/* Subtitle - more visible */}
+            <p className="text-lg sm:text-xl md:text-2xl text-white font-light max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3)' }}>
+              {heroSubtitle}
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-12 pt-10 lg:px-8">
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {navigationBoard.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="group relative overflow-hidden rounded-3xl border border-white/50 bg-white/70 p-6 shadow-lg shadow-indigo-500/10 transition duration-300 hover:-translate-y-1 hover:shadow-2xl dark:border-white/10 dark:bg-[rgba(15,23,42,0.65)]"
-            >
-              <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${item.accent} opacity-60 transition duration-300 group-hover:opacity-80`} aria-hidden />
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">{item.title}</h2>
-                  <p className="mt-3 text-sm text-zinc-700 dark:text-zinc-200">{item.description}</p>
+      {/* Catalogue Section - BOYD style */}
+      <section className="relative py-20 px-6 lg:px-8 border-t border-zinc-200 bg-white">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="mb-16 text-center">
+            <div className="inline-block mb-4 text-xs uppercase tracking-[0.3em] text-zinc-700 font-light">
+              Catalogue
+            </div>
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight text-zinc-950">
+              Explorez l'Univers
+            </h2>
+          </div>
+
+          {/* Sections Grid - minimal cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {sections.map((section, index) => (
+              <Link
+                key={section.href}
+                href={section.href}
+                className="group relative overflow-hidden border border-zinc-200 bg-white hover:border-zinc-900 transition-all duration-500"
+              >
+                {/* Use section-specific images as backgrounds */}
+                <div 
+                  className="aspect-[4/3] bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                  style={{
+                    backgroundImage: `url(${section.image || `/home_page/home_page_${Math.min(index + 2, 6)}.jpg`})`,
+                    filter: 'brightness(1)', // Increase brightness
+                  }}
+                />
+                
+                {/* Content overlay with stronger gradient for better text visibility */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 bg-gradient-to-t from-black/60 via-black/40 to-black/10">
+                  <div className="transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-500">
+                    <h3 className="text-2xl font-bold mb-2 text-white drop-shadow-2xl">
+                      {section.title}
+                    </h3>
+                    <p className="text-sm text-white font-bold mb-4 drop-shadow-xl">
+                      {section.description}
+                    </p>
+                    {section.count !== undefined && (
+                      <div className="text-xs uppercase tracking-wider text-white font-bold drop-shadow-lg">
+                        {section.count} {section.label}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                {item.count !== undefined ? (
-                  <span className="rounded-full bg-white/60 px-4 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-indigo-700 shadow-sm dark:bg-white/10 dark:text-indigo-200">
-                    {item.count} {item.label}
-                  </span>
-                ) : null}
-              </div>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-zinc-900 transition group-hover:translate-x-1 dark:text-zinc-100">
-                Enter {item.title.toLowerCase()}
-                <span aria-hidden>&rarr;</span>
-              </span>
+
+                {/* Hover line effect */}
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-500" />
+              </Link>
+            ))}
+          </div>
+
+          {/* View all link */}
+          <div className="text-center">
+            <Link
+              href="/works"
+              className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-zinc-700 hover:text-zinc-900 transition-colors duration-300 font-light group"
+            >
+              Voir tout
+              <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
             </Link>
-          ))}
+          </div>
         </div>
       </section>
 
-      <PageShell
-        eyebrow="Community"
-        title="What&apos;s resonating this week"
-        description="Catch the latest updates from the choir loft and mark the performances ahead."
-      >
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.7fr),minmax(0,1fr)]">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between gap-4">
-              <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Latest actuality</h2>
-              <Link
-                href="/actuality"
-                className="text-sm font-semibold text-[color:var(--accent)] hover:underline"
-              >
-                View all
-              </Link>
-            </div>
-            {highlights.length > 0 ? (
-              <div className="space-y-4">
-                {highlights.map((announcement) => (
-                  <article
-                    key={announcement._id}
-                    className="relative overflow-hidden rounded-3xl border border-white/40 bg-white/75 p-6 shadow-md shadow-indigo-500/10 transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-[rgba(15,23,42,0.6)]"
-                  >
-                    <div
-                      className="absolute inset-0 -z-10 bg-gradient-to-br from-white/40 via-transparent to-indigo-200/30 dark:from-indigo-500/20 dark:via-transparent dark:to-slate-900/30"
-                      aria-hidden
-                    />
-                    <div className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-indigo-600 dark:text-indigo-200">
+      {/* Dynamic Video Section - BOYD style transition */}
+      <section className="relative w-full min-h-[100vh] flex items-center justify-center">
+        <VideoBackground 
+          videoSrc="/home_page/fond ecran.mp4"
+          className="min-h-[100vh]"
+        />
+        
+        {/* Optional content overlay - minimal text */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <div className="inline-block mb-4 text-xs uppercase tracking-[0.3em] text-white/80 font-light">
+            L'Art en Mouvement
+          </div>
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight text-white mb-8">
+            Création Vivante
+          </h2>
+        </div>
+      </section>
+
+      {/* Latest Announcements - minimal style */}
+      {highlights.length > 0 && (
+        <section className="relative py-20 px-6 lg:px-8 border-t border-zinc-200 bg-[#edeae6]">
+          <div className="max-w-7xl mx-auto">
+          <div className="mb-16 text-center">
+                   <div className="inline-block mb-4 text-xs uppercase tracking-[0.3em] text-zinc-700 font-light">
+                     Actualités
+                   </div>
+                   <h2 className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight text-zinc-950">
+                     Dernières Nouvelles
+                   </h2>
+                 </div>
+
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+              {highlights.map((announcement) => (
+                <article
+                  key={announcement._id}
+                  className="group bg-white border border-zinc-200 hover:border-zinc-900 transition-all duration-500"
+                >
+                  <div className="p-6 sm:p-8">
+                    <div className="mb-4 text-xs uppercase tracking-wider text-zinc-500 font-light">
                       <time dateTime={announcement.publishedAt ?? undefined}>
                         {announcement.publishedAt
                           ? announcementDateFormatter.format(new Date(announcement.publishedAt))
-                          : "Recently"}
+                          : "Récemment"}
                       </time>
-                      {announcement.highlight ? (
-                        <span className="rounded-full bg-[color:var(--accent)]/10 px-3 py-1 text-[color:var(--accent)]">
-                          Highlight
-                        </span>
-                      ) : null}
                     </div>
-                    <h3 className="mt-4 text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-                      {announcement.title ?? "Choir update"}
+                    
+                    <h3 className="text-xl font-light mb-3 text-zinc-900 group-hover:text-zinc-700 transition-colors duration-300">
+                      {announcement.title ?? "Actualité"}
                     </h3>
-                    {truncate(announcement.excerpt) ? (
-                      <p className="mt-3 text-sm text-zinc-700 dark:text-zinc-200">
+                    
+                    {truncate(announcement.excerpt) && (
+                      <p className="text-sm text-zinc-600 font-light mb-6 leading-relaxed">
                         {truncate(announcement.excerpt)}
                       </p>
-                    ) : null}
+                    )}
+                    
                     <Link
                       href="/actuality"
-                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--accent)] hover:translate-x-1"
+                      className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-zinc-700 hover:text-zinc-900 transition-colors duration-300 font-light group/link"
                     >
-                      Continue in Actuality
-                      <span aria-hidden>&rarr;</span>
+                      Lire
+                      <span className="transform group-hover/link:translate-x-1 transition-transform duration-300">→</span>
                     </Link>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <EmptyState
-                title="No announcements yet"
-                description="We’ll publish highlights from rehearsals and services as soon as they’re available."
-                action={(
-                  <Link
-                    href="/studio"
-                    className="inline-flex items-center rounded-full bg-[color:var(--accent)] px-4 py-2 text-sm font-semibold text-[color:var(--accent-foreground)]"
-                  >
-                    Add an update
-                  </Link>
-                )}
-              />
-            )}
-          </div>
+                  </div>
+                  
+                  {/* Hover line effect */}
+                  <div className="h-0.5 w-0 bg-zinc-900 group-hover:w-full transition-all duration-500" />
+                </article>
+              ))}
+            </div>
 
-          <div className="space-y-6">
-            <div className="flex items-center justify-between gap-4">
-              <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Upcoming gatherings</h2>
-              <Link href="/events" className="text-sm font-semibold text-[color:var(--accent)] hover:underline">
-                All events
+            <div className="text-center">
+              <Link
+                href="/actuality"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-zinc-700 hover:text-zinc-900 transition-colors duration-300 font-light group"
+              >
+                Voir toutes les actualités
+                <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
               </Link>
             </div>
-            {featuredEvent ? (
-              <div className="space-y-6">
-                <article className="relative overflow-hidden rounded-3xl border border-white/40 bg-white/80 p-6 shadow-lg shadow-indigo-500/10 dark:border-white/10 dark:bg-[rgba(15,23,42,0.6)]">
-                  <div
-                    className="absolute inset-0 -z-10 bg-gradient-to-br from-indigo-200/40 via-transparent to-purple-200/40 dark:from-indigo-500/20 dark:via-transparent dark:to-slate-900/40"
-                    aria-hidden
-                  />
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-indigo-600 dark:text-indigo-200">
-                    Featured event
-                  </p>
-                  <h3 className="mt-4 text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-                    {featuredEvent.title ?? "Upcoming celebration"}
-                  </h3>
-                  {featuredEvent.date ? (
-                    <time
-                      dateTime={featuredEvent.date}
-                      className="mt-3 flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-200"
-                    >
-                      {eventDateFormatter.format(new Date(featuredEvent.date))}
-                    </time>
-                  ) : null}
-                  {featuredEvent.location ? (
-                    <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
-                      {featuredEvent.location}
-                    </p>
-                  ) : null}
-                  {featuredEvent.description ? (
-                    <p className="mt-4 text-sm leading-relaxed text-zinc-700 dark:text-zinc-200">
-                      {featuredEvent.description}
-                    </p>
-                  ) : null}
-                  <Link
-                    href="/events"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--accent)] hover:translate-x-1"
-                  >
-                    View full schedule
-                    <span aria-hidden>&rarr;</span>
-                  </Link>
-                </article>
-
-                {secondaryEvents.length > 0 ? (
-                  <ul className="space-y-4">
-                    {secondaryEvents.map((event) => (
-                      <li
-                        key={event._id}
-                        className="flex items-start justify-between gap-4 rounded-2xl border border-white/40 bg-white/70 px-4 py-4 text-sm shadow-sm shadow-indigo-500/10 dark:border-white/10 dark:bg-[rgba(15,23,42,0.5)]"
-                      >
-                        <div>
-                          <p className="font-semibold text-zinc-900 dark:text-zinc-100">
-                            {event.title ?? "Upcoming gathering"}
-                          </p>
-                          {event.date ? (
-                            <time className="text-xs text-zinc-600 dark:text-zinc-300" dateTime={event.date}>
-                              {eventDateFormatter.format(new Date(event.date))}
-                            </time>
-                          ) : null}
-                        </div>
-                        {event.location ? (
-                          <p className="text-xs text-zinc-500 dark:text-zinc-300">{event.location}</p>
-                        ) : null}
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </div>
-            ) : (
-              <EmptyState
-                title="No events planned yet"
-                description="Once services or rehearsals are scheduled they’ll appear here automatically."
-                action={(
-                  <Link
-                    href="/studio"
-                    className="inline-flex items-center rounded-full bg-[color:var(--accent)] px-4 py-2 text-sm font-semibold text-[color:var(--accent-foreground)]"
-                  >
-                    Schedule an event
-                  </Link>
-                )}
-              />
-            )}
           </div>
+        </section>
+      )}
+
+      {/* Featured Event - minimal style */}
+      {featuredEvent && (
+        <section className="relative py-20 px-6 lg:px-8 border-t border-zinc-200 bg-[#edeae6]">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-block mb-4 text-xs uppercase tracking-[0.3em] text-zinc-500 font-light">
+              Événement
+            </div>
+            
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-light mb-8 tracking-tight text-zinc-900">
+              {featuredEvent.title ?? "Événement à venir"}
+            </h2>
+            
+            {featuredEvent.date && (
+              <time
+                dateTime={featuredEvent.date}
+                className="block mb-4 text-lg text-zinc-600 font-light"
+              >
+                {eventDateFormatter.format(new Date(featuredEvent.date))}
+              </time>
+            )}
+            
+            {featuredEvent.location && (
+              <p className="mb-8 text-lg text-zinc-600 font-light">
+                {featuredEvent.location}
+              </p>
+            )}
+            
+            {featuredEvent.description && (
+              <p className="mb-12 text-base leading-relaxed text-zinc-700 font-light max-w-2xl mx-auto">
+                {featuredEvent.description}
+              </p>
+            )}
+            
+            <Link
+              href="/events"
+              className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-zinc-700 hover:text-zinc-900 transition-colors duration-300 font-light group border border-zinc-900 px-8 py-4 hover:bg-zinc-900 hover:text-white transition-all duration-300"
+            >
+              Voir tous les événements
+              <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* About Section - minimal footer style */}
+      <section className="relative py-20 px-6 lg:px-8 border-t border-zinc-200 bg-[#edeae6]">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-8 text-xs uppercase tracking-[0.3em] text-zinc-500 font-light">
+            À propos
+          </div>
+          <p className="text-lg text-zinc-700 font-light leading-relaxed max-w-2xl mx-auto">
+            {heroTagline}
+          </p>
         </div>
-      </PageShell>
+      </section>
     </div>
   );
 }

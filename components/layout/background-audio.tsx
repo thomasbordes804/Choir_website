@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from "react";
+import { AudioContextProvider } from "./audio-context-provider";
+import { AudioVisualizer } from "./audio-visualizer";
+import { MusicControls } from "./music-controls";
 
 function registerUnlock(handler: () => void) {
   const onceHandler = () => {
@@ -18,13 +21,62 @@ function registerUnlock(handler: () => void) {
   };
 }
 
+// Available music tracks
+const musicTracks = [
+  {
+    id: 'last-dream',
+    title: 'Last Dream',
+    path: '/media/last-dream.mp3',
+    color: '#ff6b6b',
+    coverImage: '/Musiques/Last Dream - song.png',
+  },
+  {
+    id: 'yura-yura',
+    title: 'Yura Yura',
+    path: '/media/Yura yura.mp3',
+    color: '#a8a7d4',
+    coverImage: '/Musiques/Yura yura - song.png',
+  },
+  {
+    id: 'the-journey',
+    title: 'The Journey',
+    path: '/media/Tom Misch - The Journey.mp3',
+    color: '#a8a7d4',
+    coverImage: '/Musiques/Yura yura - song.png',
+  },
+  {
+    id: 'photograph',
+    title: 'Photograph',
+    path: '/media/Ed Sheeran - Photograph.mp3',
+    color: '#a8a7d4',
+    coverImage: '/Musiques/Yura yura - song.png',
+  },
+];
+
 export function BackgroundAudio() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [requiresInteraction, setRequiresInteraction] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const wasPlayingRef = useRef(false);
 
+  const currentTrack = musicTracks[currentTrackIndex];
+
+  // Initialize audio with current track
   useEffect(() => {
-    const audio = new Audio("/media/last-dream.mp3");
+    if (!currentTrack) return;
+
+    // Clean up previous audio completely
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.src = "";
+      audioRef.current.load();
+      audioRef.current = null;
+    }
+
+    // Create new audio element
+    const audio = new Audio(currentTrack.path);
     audio.loop = true;
     audio.volume = 0.35;
     audioRef.current = audio;
@@ -37,8 +89,13 @@ export function BackgroundAudio() {
       }
 
       try {
-        await audioRef.current.play();
-        setIsPlaying(true);
+        if (wasPlayingRef.current) {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        } else {
+          setIsPlaying(false);
+        }
+        setHasStarted(true);
         setRequiresInteraction(false);
       } catch (error) {
         console.warn("Autoplay blocked, waiting for user interaction", error);
@@ -66,7 +123,7 @@ export function BackgroundAudio() {
         unregisterUnlock();
       }
     };
-  }, []);
+  }, [currentTrack]);
 
   const togglePlayback = async () => {
     if (!audioRef.current) {
@@ -76,12 +133,15 @@ export function BackgroundAudio() {
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
+      wasPlayingRef.current = false;
       return;
     }
 
     try {
       await audioRef.current.play();
       setIsPlaying(true);
+      wasPlayingRef.current = true;
+      setHasStarted(true);
       setRequiresInteraction(false);
     } catch (error) {
       console.warn("Playback blocked", error);
@@ -89,30 +149,37 @@ export function BackgroundAudio() {
     }
   };
 
+  const handleNext = () => {
+    wasPlayingRef.current = isPlaying;
+    setCurrentTrackIndex((prev) => (prev + 1) % musicTracks.length);
+  };
+
+  const handleSelectTrack = (index: number) => {
+    wasPlayingRef.current = isPlaying;
+    setCurrentTrackIndex(index);
+  };
+
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
-      {requiresInteraction ? (
-        <div className="rounded-full bg-white px-4 py-2 text-xs font-medium text-zinc-600 shadow-lg ring-1 ring-zinc-200 dark:bg-zinc-900 dark:text-zinc-300 dark:ring-white/10">
-          Tap play to enable background music
-        </div>
-      ) : null}
-      <button
-        type="button"
-        onClick={togglePlayback}
-        className="inline-flex items-center gap-2 rounded-full bg-[color:var(--accent)] px-4 py-2 text-sm font-semibold text-[color:var(--accent-foreground)] shadow-lg transition hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--accent)]"
-        aria-pressed={isPlaying}
-      >
-        <span className="inline-flex h-2.5 w-2.5 items-center justify-center">
-          <span
-            className={`block h-2.5 w-2.5 ${
-              isPlaying
-                ? "animate-pulse rounded-full bg-[color:var(--accent-foreground)]"
-                : "rounded-sm border border-[color:var(--accent-foreground)]"
-            }`}
-          />
-        </span>
-        {isPlaying ? "Pause music" : "Play music"}
-      </button>
-    </div>
+    <AudioContextProvider audioElement={audioRef.current} isPlaying={isPlaying}>
+      {/* Audio visualizations */}
+      {hasStarted && (
+        <>
+          <div className="fixed bottom-0 left-0 right-0 h-48 pointer-events-none z-0">
+            <AudioVisualizer isPlaying={isPlaying} />
+          </div>
+        </>
+      )}
+
+      {/* Music Controls integrated in header */}
+      <MusicControls
+        isPlaying={isPlaying}
+        currentTrackTitle={currentTrack?.title}
+        onPlayPause={togglePlayback}
+        onNext={handleNext}
+        onSelectTrack={handleSelectTrack}
+        tracks={musicTracks.map(t => ({ id: t.id, title: t.title }))}
+        currentTrackIndex={currentTrackIndex}
+      />
+    </AudioContextProvider>
   );
 }

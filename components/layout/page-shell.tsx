@@ -10,9 +10,16 @@ interface PageShellProps {
 
 export function PageShell({ title, description, actions, eyebrow, children }: PageShellProps) {
   return (
-    <section className="relative mx-auto w-full max-w-6xl px-6 py-14 lg:px-8">
-      <div className="relative overflow-hidden rounded-3xl border border-[color:var(--surface-border)] bg-[color:var(--surface)]/95 px-8 py-10 shadow-xl shadow-indigo-500/10 backdrop-blur-sm lg:px-12 lg:py-14">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-white/40 via-transparent to-indigo-200/20 opacity-70 dark:from-white/5 dark:via-white/0 dark:to-indigo-500/10" aria-hidden />
+    <section className="relative mx-auto w-full max-w-6xl px-6 py-14 lg:px-8 font-[family-name:var(--font-playfair)]">
+      <div className="relative overflow-hidden rounded-3xl border border-[color:var(--surface-border)] bg-[color:var(--surface)]/95 px-8 py-10 shadow-xl shadow-[color:var(--accent)]/15 backdrop-blur-sm lg:px-12 lg:py-14">
+        {/* Vibrant artistic gradient overlay */}
+        <div 
+          className="absolute inset-0 -z-10 opacity-60 dark:opacity-40" 
+          style={{
+            background: 'linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(78, 205, 196, 0.1) 25%, rgba(255, 230, 109, 0.1) 50%, rgba(255, 139, 148, 0.1) 75%, rgba(149, 225, 211, 0.1) 100%)',
+          }}
+          aria-hidden 
+        />
         <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-3">
             {eyebrow ? (

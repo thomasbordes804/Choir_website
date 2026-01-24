@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { sanityConfig } from "@/lib/sanity/config"
 
 const nextConfig: NextConfig = {
   images: {
@@ -7,7 +8,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
         port: "",
-        pathname: "/images/pbsm0i27/production/**",
+        pathname: `/images/${sanityConfig.projectId}/production/**`,
       },
     ],
   },

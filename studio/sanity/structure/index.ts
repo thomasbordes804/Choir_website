@@ -1,4 +1,5 @@
 import type { StructureResolver } from 'sanity/structure'
+import { Palette } from 'phosphor-react'; // or another icon
 
 import {
   Gear,
@@ -60,6 +61,14 @@ export const structure: StructureResolver = (S) =>
             .title('Chapitres de biographie')
         ),
 
+              // --- WORKS ---
+      S.listItem()
+      .title('Works')
+      .icon(Palette)
+      .child(
+        S.documentTypeList('workSection')
+          .title('Sections d\'œuvres')
+      ),
       // --- PLANNING ---
       S.listItem()
 

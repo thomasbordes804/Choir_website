@@ -1,0 +1,225 @@
+{
+  "title": "Livres",
+  "description": "Découvrez les ouvrages de Michel Hilger : témoignages, autobiographie et récits inspirants.",
+  "content": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Cette page présente les ouvrages de Michel Hilger, témoignant de son parcours, de son combat contre la maladie et de son message d'espoir."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        {
+          "_type": "link",
+          "_key": "link_books1",
+          "href": "https://www.artsparadise.net/"
+        }
+      ],
+      "children": [
+        {
+          "_type": "span",
+          "text": "Pour plus d'informations, visitez le "
+        },
+        {
+          "_type": "span",
+          "marks": ["link_books1"],
+          "text": "site officiel d'ArtsParadise"
+        },
+        {
+          "_type": "span",
+          "text": "."
+        }
+      ]
+    }
+  ],
+  "books": [
+    {
+      "slug": "la-mort-attendra",
+      "title": "La mort attendra",
+      "subtitle": "Un témoignage autobiographique",
+      "coverImagePath": "/Livres/la_mort_attendra.webp",
+      "authors": ["Michel Hilger", "Gilbert Bordes"],
+      "publisher": "Éditions Belfond",
+      "publicationDate": "Novembre 2016",
+      "galleryImages": [
+        {
+          "url": "/Livres/la_mort_attendra_1.webp",
+          "alt": "La mort attendra - Image 1",
+          "caption": null
+        },
+        {
+          "url": "/Livres/la_mort_attendra_2.webp",
+          "alt": "La mort attendra - Image 2",
+          "caption": null
+        },
+        {
+          "url": "/Livres/la_mort_attendra_3.webp",
+          "alt": "La mort attendra - Image 3",
+          "caption": null
+        }
+      ],
+      "description": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "\"La mort attendra\" est un livre autobiographique de Michel Hilger, co-écrit avec Gilbert Bordes. Il témoigne du combat de Michel Hilger contre la maladie, un AVC lui ayant causé une hémiplégie du côté droit. Il écrit sur sa laborieuse rééducation pour redevenir l'« altiste-peintre » qu'il a toujours été."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Son livre se veut un message d'espoir à destination de tous, aussi bien malades que bien portants, pour montrer qu'à force de courage et de ténacité, rien n'est impossible."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "Le livre est paru en novembre 2016 aux éditions Belfond et est disponible en versions électronique et papier. Vous pouvez l'acheter en librairie physique ou le commander en ligne."
+            }
+          ]
+        }
+      ],
+      "additionalContent": [
+        {
+          "_type": "block",
+          "style": "h3",
+          "children": [
+            {
+              "_type": "span",
+              "text": "À propos des auteurs"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "link_author1",
+              "href": "https://www.artsparadise.net/"
+            },
+            {
+              "_type": "link",
+              "_key": "link_author2",
+              "href": "https://www.artsparadise.net/bio/"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "text": "Michel Hilger est altiste, peintre, compositeur et poète. Pour en savoir plus sur son parcours, consultez sa "
+            },
+            {
+              "_type": "span",
+              "marks": ["link_author2"],
+              "text": "biographie"
+            },
+            {
+              "_type": "span",
+              "text": " sur le "
+            },
+            {
+              "_type": "span",
+              "marks": ["link_author1"],
+              "text": "site officiel d'ArtsParadise"
+            },
+            {
+              "_type": "span",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "style": "normal",
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "link_author3",
+              "href": "https://fr.wikipedia.org/wiki/Gilbert_Bordes"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "text": "Gilbert Bordes est un écrivain français, auteur de nombreux romans et essais. Pour plus d'informations, consultez sa page "
+            },
+            {
+              "_type": "span",
+              "marks": ["link_author3"],
+              "text": "Wikipedia"
+            },
+            {
+              "_type": "span",
+              "text": "."
+            }
+          ]
+        }
+      ],
+      "purchaseLinks": [
+        {
+          "label": "Amazon (version papier)",
+          "url": "https://www.amazon.fr/dp/2714474465"
+        },
+        {
+          "label": "Amazon (version électronique)",
+          "url": "https://www.amazon.fr/dp/B01N0Q2F3G"
+        },
+        {
+          "label": "Fnac (version papier)",
+          "url": "https://www.fnac.com/a10122366/Michel-Hilger-La-mort-attendra"
+        },
+        {
+          "label": "Fnac (version électronique)",
+          "url": "https://www.fnac.com/livre-numerique/a10122366/Michel-Hilger-La-mort-attendra"
+        },
+        {
+          "label": "Libra Diffusio (version gros caractères)",
+          "url": "https://www.editionslibradiffusio.fr/livre/fiche/9782377350000"
+        },
+        {
+          "label": "Place des Editeurs (version électronique)",
+          "url": "https://www2.e-interforum.com/livre/fiche/9782714474103"
+        }
+      ]
+    },
+    {
+      "slug": "les-miracles-de-ma-vie",
+      "title": "Les miracles de ma vie",
+      "subtitle": "Suite de \"La mort attendra\"",
+      "coverImagePath": "/Livres/les_miracles_de_ma_vie.webp",
+      "description": [
+        {
+          "_type": "block",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "text": "La suite de \"La mort attendra\", intitulée \"Les miracles de ma vie\", est actuellement en préparation."
+            }
+          ]
+        }
+      ],
+      "purchaseLinks": []
+    }
+  ]
+}

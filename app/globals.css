@@ -1,14 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f3ff;
-  --foreground: #0f172a;
-  --accent: #5b21b6;
-  --accent-foreground: #f5f3ff;
-  --muted: #e0e7ff;
-  --muted-foreground: #3730a3;
-  --surface: rgba(255, 255, 255, 0.75);
-  --surface-border: rgba(99, 102, 241, 0.25);
+  /* Vibrant Artistic Color Palette inspired by logo */
+  --background: #faf9f6; /* Neutral warm beige - no purple! */
+  --foreground: #1a1a1a;
+  
+  /* Primary accent - warm coral/orange */
+  --accent: #ff6b6b;
+  --accent-foreground: #ffffff;
+  
+  /* Secondary accents - vibrant colors from logo palette */
+  --accent-2: #a8a7d4;
+  --accent-3: #636098;
+  --accent-4: #8d1e11;
+  --accent-5: #130c71;
+  --accent-6: #752820;
+  
+  --muted: rgba(255, 107, 107, 0.1);
+  --muted-foreground: #d63031;
+  
+  --surface: rgba(255, 255, 255, 0.85);
+  --surface-border: rgba(255, 107, 107, 0.2);
 }
 
 @theme inline {
@@ -20,18 +32,30 @@
   --color-muted-foreground: var(--muted-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-playfair: var(--font-playfair);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: radial-gradient(circle at 20% 20%, #1f2937, #020617 65%);
-    --foreground: #e2e8f0;
-    --accent: #a78bfa;
-    --accent-foreground: #1f2937;
-    --muted: rgba(99, 102, 241, 0.2);
-    --muted-foreground: #c7d2fe;
-    --surface: rgba(15, 23, 42, 0.6);
-    --surface-border: rgba(129, 140, 248, 0.35);
+    /* Neutral background that blends with main_background.png */
+    --background: #faf9f6; /* Same neutral beige - no purple! */
+    --foreground: #1a1a1a;
+    
+    /* Brighter accents for dark mode */
+    --accent: #ff8787;
+    --accent-foreground: #1a1a1a;
+    
+    --accent-2: #b8b7e4;
+    --accent-3: #7d7bb8;
+    --accent-4: #ad2e21;
+    --accent-5: #2d1c91;
+    --accent-6: #953830;
+    
+    --muted: rgba(255, 135, 135, 0.15);
+    --muted-foreground: #ffb3b3;
+    
+    --surface: rgba(255, 255, 255, 0.1);
+    --surface-border: rgba(255, 135, 135, 0.3);
   }
 }
 
@@ -42,19 +66,55 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--background);
-  background-image: radial-gradient(circle at 15% 20%, rgba(129, 140, 248, 0.45), transparent 45%),
-    radial-gradient(circle at 80% 0%, rgba(146, 64, 246, 0.35), transparent 55%),
-    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.25), transparent 60%);
+  background-color: #faf9f6; /* Neutral warm beige - no purple tones */
+  /* Very subtle, neutral gradient background that blends with main_background.png */
+  background-image: 
+    /* Very subtle warm beige gradients - completely neutral */
+    radial-gradient(circle at 10% 20%, rgba(250, 249, 246, 0.2), transparent 50%),
+    radial-gradient(circle at 90% 30%, rgba(255, 253, 250, 0.15), transparent 50%),
+    radial-gradient(circle at 50% 70%, rgba(252, 250, 247, 0.15), transparent 50%),
+    /* Very subtle warm tones - no purple */
+    radial-gradient(circle at 20% 80%, rgba(255, 250, 245, 0.1), transparent 50%),
+    radial-gradient(circle at 80% 10%, rgba(250, 248, 245, 0.1), transparent 50%),
+    /* Overall very subtle neutral gradient - no purple */
+    linear-gradient(135deg, 
+      rgba(250, 249, 246, 0.05) 0%, 
+      rgba(255, 253, 250, 0.05) 25%,
+      rgba(252, 250, 247, 0.05) 50%, 
+      rgba(250, 249, 246, 0.05) 75%,
+      rgba(255, 253, 250, 0.05) 100%);
   background-attachment: fixed;
+  background-size: cover;
   color: var(--foreground);
-  font-family: var(--font-geist-sans), "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Use Playfair Display as default font */
+  font-family: var(--font-playfair), "Playfair Display", "Georgia", serif;
+  font-weight: 500; /* Medium weight for better visibility */
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Make all text bolder and more visible - but not white text */
+p:not(.text-white):not([class*="text-white"]),
+span:not(.text-white):not([class*="text-white"]),
+div:not(.text-white):not([class*="text-white"]),
+li:not(.text-white):not([class*="text-white"]),
+td:not(.text-white):not([class*="text-white"]),
+th:not(.text-white):not([class*="text-white"]) {
+  font-weight: 500; /* Medium weight instead of normal */
+  color: #1a1a1a; /* Darker text for better visibility */
+}
+
+/* Force white text to stay white */
+.text-white,
+[class*="text-white"] {
+  color: #ffffff !important;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  font-weight: 600; /* Bolder links */
 }
 
 a:hover {
@@ -62,7 +122,336 @@ a:hover {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 60%, transparent);
+  background: color-mix(in srgb, var(--accent) 70%, transparent);
   color: var(--accent-foreground);
-  text-shadow: 0 0 12px rgba(91, 33, 182, 0.45);
+  text-shadow: 0 0 8px rgba(255, 107, 107, 0.4);
+}
+
+/* Musical notes animations for biography sections */
+@keyframes floatNote1 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-30px, -40px) rotate(-15deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floatNote2 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(30px, -50px) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floatNote3 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-20px, 30px) rotate(-10deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floatNote4 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(25px, 35px) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floatNote5 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -60px) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+.musical-note {
+  position: absolute;
+  font-size: 1.5rem;
+  pointer-events: none;
+  z-index: 20;
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
+  opacity: 0;
+}
+
+.group:hover .musical-note-1 {
+  animation: floatNote1 1.5s ease-out forwards;
+}
+
+.group:hover .musical-note-2 {
+  animation: floatNote2 1.8s ease-out 0.2s forwards;
+}
+
+.group:hover .musical-note-3 {
+  animation: floatNote3 1.6s ease-out 0.4s forwards;
+}
+
+.group:hover .musical-note-4 {
+  animation: floatNote4 1.7s ease-out 0.1s forwards;
+}
+
+.group:hover .musical-note-5 {
+  animation: floatNote5 2s ease-out 0.3s forwards;
+}
+
+/* Home page animations */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-20px) rotate(10deg); 
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes gradient {
+  0%, 100% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+/* Biography page creative styles */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  25% { 
+    transform: translateY(-15px) rotate(5deg); 
+  }
+  50% { 
+    transform: translateY(-25px) rotate(-5deg); 
+  }
+  75% { 
+    transform: translateY(-15px) rotate(3deg); 
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Radial gradient utility */
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Works page artistic styles */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Artistic frame entrance animation */
+@keyframes frame-entrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Books page interactive styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+}
+
+.rotate-y-90 {
+  transform: rotateY(90deg);
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+/* Book page floating animation */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-20px) rotate(5deg); 
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Minimal hover effects */
+.minimal-hover {
+  transition: all 0.3s ease;
+}
+
+.minimal-hover:hover {
+  transform: translateY(-2px);
+}
+
+/* Clean underline animation */
+.underline-animate {
+  position: relative;
+}
+
+.underline-animate::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.underline-animate:hover::after {
+  width: 100%;
+}
+
+* {
+  cursor: none !important;
+}
+
+/* Restore cursor for input fields and text areas */
+input,
+textarea,
+select,
+[contenteditable] {
+  cursor: text !important;
+}
+
+/* Restore cursor for disabled elements */
+[disabled] {
+  cursor: not-allowed !important;
+}
+
+/* Page transitions - Lumen Artspace style */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.page-enter {
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.page-exit {
+  animation: fadeOut 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

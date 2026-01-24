@@ -2,6 +2,8 @@
 import siteSettings from './schemas/siteSettings'
 import page from './schemas/page'
 import biographyTopic from './schemas/biographyPage'
+import biographySection from './schemas/biographySection'
+import workSection from './schemas/workSection'
 
 import event from './schemas/event'
 import rehearsal from './schemas/rehearsal'
@@ -15,9 +17,10 @@ import videoEmbed from './schemas/videoEmbed'
 
 export const schemaTypes = [
   siteSettings,
-    page,
+  page,
   biographyTopic,
-
+  biographySection,
+  workSection,
   event,
   rehearsal,
   choirMember,
@@ -28,4 +31,3 @@ export const schemaTypes = [
   gallery,
   videoEmbed,
 ]
-

@@ -55,7 +55,7 @@ export function VideoEmbed({ url, title, poster, className }: VideoEmbedProps) {
           controls
           preload="metadata"
           poster={poster?.url}
-          className="h-auto w-full rounded-3xl border border-white/40 bg-black/60 shadow-lg shadow-indigo-500/10"
+          className="h-auto w-full rounded-3xl border border-white/40 bg-black/60 shadow-lg shadow-[color:var(--accent)]/10"
         >
           <source src={url} />
           Votre navigateur ne prend pas en charge la lecture vidéo.
@@ -66,7 +66,7 @@ export function VideoEmbed({ url, title, poster, className }: VideoEmbedProps) {
 
   return (
     <div className={className}>
-      <div className="relative aspect-video overflow-hidden rounded-3xl border border-white/40 bg-black/70 shadow-lg shadow-indigo-500/10">
+      <div className="relative aspect-video overflow-hidden rounded-3xl border border-white/40 bg-black/70 shadow-lg shadow-[color:var(--accent)]/10">
         {poster?.url ? (
           <Image
             src={poster.url}
