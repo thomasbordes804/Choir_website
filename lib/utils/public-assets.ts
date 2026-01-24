@@ -366,8 +366,9 @@ export const PUBLIC_FOLDERS = {
     
     if (folderConfig.pattern && folderConfig.count) {
       const count = limit ? Math.min(limit, folderConfig.count) : folderConfig.count;
-      return Array.from({ length: count }, (_, i) => 
-        `${folderConfig.basePath}/${folderConfig.pattern(i)}`
+      const pattern = folderConfig.pattern;
+      return Array.from({ length: count }, (_, i) =>
+        `${folderConfig.basePath}/${pattern(i)}`
       );
     }
     
@@ -414,7 +415,6 @@ export const PUBLIC_FOLDERS = {
       'peintures': 'personnages',
       'chorale de sucy en brie': 'portraits',
       'chorale de bondy': 'portraits',
-      'chorale d\'orly': 'portraits',
       'chorale d\'orly': 'portraits',
       'sucy': 'portraits',
       'bondy': 'portraits',
@@ -472,12 +472,6 @@ export const PUBLIC_FOLDERS = {
    * @returns Full image path or default fallback
    */
   export function getSubsectionImagePath(label: string): string {
-    const folderConfig = getFolderForSubsection(label);
-    if (folderConfig) {
-      const image = getSingleImageFromFolder(folderConfig, 0);
-      if (image) return image;
-    }
-    
     // Default fallback
     return '/biographie/portrait.webp';
   }
@@ -490,17 +484,6 @@ export const PUBLIC_FOLDERS = {
    */
   export function getSubsectionImagePaths(label: string, count: number = 4): string[] {
     const folderConfig = getFolderForSubsection(label);
-    if (folderConfig) {
-      const images = getImagesFromFolder(folderConfig, count);
-      if (images.length > 0) {
-        // If we have fewer images than requested, repeat them
-        while (images.length < count && images.length > 0) {
-          images.push(...images.slice(0, count - images.length));
-        }
-        return images.slice(0, count);
-      }
-    }
-    
     // Default fallback
     return Array(count).fill('/biographie/portrait.webp');
   }

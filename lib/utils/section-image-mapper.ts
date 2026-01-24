@@ -1,4 +1,29 @@
-import { FOLDER_IMAGES, getImagesFromFolder, getFolderForSubsection } from './public-assets';
+import { FOLDER_IMAGES, getFolderForSubsection } from './public-assets';
+
+export function getImagesFromFolder(
+  folderConfig: { 
+    basePath: string; 
+    files?: readonly string[]; 
+    pattern?: (i: number) => string; 
+    count?: number;
+  },
+  limit?: number
+): string[] {
+  if (folderConfig.files) {
+    const files = limit ? folderConfig.files.slice(0, limit) : folderConfig.files;
+    return files.map(file => `${folderConfig.basePath}/${file}`);
+  }
+
+  if (folderConfig.pattern && folderConfig.count) {
+    const count = limit ? Math.min(limit, folderConfig.count) : folderConfig.count;
+    const pattern = folderConfig.pattern;
+    return Array.from({ length: count }, (_, i) =>
+      `${folderConfig.basePath}/${pattern(i)}`
+    );
+  }
+
+  return [];
+}
 
 /**
  * Map section slugs/titles to exactly 4 image paths per subsection

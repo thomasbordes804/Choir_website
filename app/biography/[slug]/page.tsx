@@ -63,10 +63,10 @@ export default async function BiographySectionPage({ params }: Props) {
     notFound();
   }
 
-  // Extract videos from content
-  const videos = extractVideos(section.content);
-  const contentWithoutVideos = filterContentWithoutVideos(section.content);
-
+  const content = section.content ?? [];
+  const videos = extractVideos(content);
+  const contentWithoutVideos = filterContentWithoutVideos(content);
+  
   // Filter announcements related to Grand Pari's
   const relatedAnnouncements = slug === "grand-paris-en-choeurs"
     ? allAnnouncements
