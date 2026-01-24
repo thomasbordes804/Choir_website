@@ -77,14 +77,6 @@ export type VideoEmbedValue = {
   poster?: SanityImageAsset | null;
 };
 
-export type AnnouncementSummary = {
-  _id: string;
-  title: string | null;
-  slug: string | null;
-  publishedAt: string | null;
-  excerpt: string | null;
-};
-
 export type BiographyMediaImage = SanityImageAsset & { _type: "image"; _key?: string | null };
 export type BiographyMediaVideo = VideoEmbedValue & { _type: "videoEmbed"; _key?: string | null };
 export type BiographyMedia = BiographyMediaImage | BiographyMediaVideo;

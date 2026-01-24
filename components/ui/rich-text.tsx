@@ -1,10 +1,15 @@
 import Image from "next/image";
-import { PortableText, type PortableTextReactComponents } from "@portabletext/react";
-
 import { cn } from "@/lib/utils";
 import { VideoEmbed } from "@/components/ui/video-embed";
+import { PortableText, type PortableTextReactComponents } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 
-const components: PortableTextReactComponents = {
+interface RichTextProps {
+  value: PortableTextBlock[] | Record<string, unknown>[];
+  className?: string;
+}
+
+const components: Partial<PortableTextReactComponents> = {
   block: {
     normal: ({ children }) => <p className="text-base leading-7 text-zinc-900 dark:text-zinc-100 font-medium">{children}</p>,
     h2: ({ children }) => (
@@ -90,19 +95,16 @@ const components: PortableTextReactComponents = {
   },
 };
 
-interface RichTextProps {
-  value: Array<Record<string, unknown>>;
-  className?: string;
-}
-
 export function RichText({ value, className }: RichTextProps) {
-  if (!value || value.length === 0) {
+  const safeValue = (Array.isArray(value) ? value : []) as PortableTextBlock[];
+
+  if (safeValue.length === 0) {
     return null;
   }
 
   return (
     <div className={cn("space-y-4", className)}>
-      <PortableText value={value} components={components} />
+      <PortableText value={safeValue} components={components} />
     </div>
   );
 }
