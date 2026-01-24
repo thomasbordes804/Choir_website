@@ -9,7 +9,7 @@ interface AudioVisualizerProps {
 
 export function AudioVisualizer({ isPlaying }: AudioVisualizerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
   const lastFrameRef = useRef<ImageData | null>(null);
   const { analyser, dataArray, isReady } = useAudioContext();
 

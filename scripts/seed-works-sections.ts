@@ -192,7 +192,8 @@ async function seedWorksSections() {
             description: section.description,
             order: section.order,
             ...(section.content && { content: section.content }),
-            ...(section.subsections && { subsections: section.subsections }),
+            ...(section.content && { content: section.content }),
+            ...(("subsections" in section) && section.subsections ? { subsections: section.subsections } : {}),
           })
           .commit();
       } else {
