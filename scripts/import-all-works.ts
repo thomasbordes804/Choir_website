@@ -162,7 +162,7 @@ async function importImageGallery(catSlug: string, config: CatConfig) {
         contentType: 'image/webp',
       });
 
-      const doc: Record<string, unknown> = {
+      const doc: Record<string, unknown> & { _id: string; _type: string } = {
         _id: docId,
         _type: config.docType,
         title: art.title,
