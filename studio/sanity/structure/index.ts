@@ -1,154 +1,211 @@
 import type { StructureResolver } from 'sanity/structure'
-import { Palette } from 'phosphor-react'; // or another icon
+import type { StructureBuilder } from 'sanity/structure'
 
 import {
   Gear,
   FileText,
-  Calendar,
-  CalendarCheck,
-  MusicNotesPlus,
+  Palette,
+  PaintBrush,
+  Pencil,
+  Cube,
+  Package,
+  Quotes,
   MusicNote,
   MusicNotes,
+  MusicNotesPlus,
   Tag,
-  Users,
+  BookOpen,
+  Books,
   UsersThree,
   UserCircle,
+  Calendar,
+  CalendarCheck,
   Megaphone,
   MegaphoneSimple,
-    Image,
+  Newspaper,
   ImageSquare,
-  BookOpen,
+  Image,
+  Archive,
+  Drop,
+  TShirt,
+  Flower,
+  Signpost,
+  Baby,
+  UserSquare,
+  PianoKeys,
+  Table,
+  Heart,
 } from 'phosphor-react'
 
+/**
+ * A category that has subcategories (e.g. Peintures sur toiles → Natures mortes, Personnages…).
+ * First level lists the subcategories, second level lists artworks in that subcategory.
+ */
+function categoryWithSubs(
+  S: StructureBuilder,
+  catId: string,
+  docType: string,
+  title: string,
+  icon: React.ComponentType,
+) {
+  return S.listItem()
+    .title(title)
+    .icon(icon)
+    .child(
+      S.documentList()
+        .id(`${catId}-subs`)
+        .title(title)
+        .apiVersion('2024-01-01')
+        .filter(`_type == "workCategory" && parent._ref == $parentId`)
+        .params({ parentId: catId })
+        .child((subCatId) =>
+          S.documentList()
+            .title(title)
+            .apiVersion('2024-01-01')
+            .filter(`_type == "${docType}" && $catId in categories[]._ref`)
+            .params({ catId: subCatId })
+        )
+    )
+}
+
+/**
+ * A flat category (no subcategories) — clicking it shows the artworks directly.
+ */
+function categoryFlat(
+  S: StructureBuilder,
+  catId: string,
+  docType: string,
+  title: string,
+  icon: React.ComponentType,
+) {
+  return S.listItem()
+    .title(title)
+    .icon(icon)
+    .child(
+      S.documentList()
+        .id(`${catId}-list`)
+        .title(title)
+        .apiVersion('2024-01-01')
+        .filter(`_type == "${docType}" && $catId in categories[]._ref`)
+        .params({ catId })
+    )
+}
 
 export const structure: StructureResolver = (S) =>
   S.list()
     .id('root')
-    .title('Content')
+    .title('Contenu')
     .items([
-      // --- GENERAL ---
+      // --- RÉGLAGES ---
       S.listItem()
-        .title('General')
+        .title('Réglages')
         .icon(Gear)
         .child(
           S.list()
-            .title('General')
+            .title('Réglages')
             .items([
-                            S.listItem()
-                .title('Site Settings')
+              S.listItem()
+                .title('Paramètres du site')
                 .icon(Gear)
-                .child(
-                  S.document()
-                    .schemaType('siteSettings')
-                    .documentId('siteSettings')
-                ),
-
-                            S.documentTypeListItem('page')
-                .title('Pages')
-                .icon(FileText),
-
-
-
+                .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+              S.documentTypeListItem('page').title('Pages').icon(FileText),
             ])
         ),
 
-            // --- BIOGRAPHY ---
+      // --- ŒUVRES ---
       S.listItem()
-        .title('Biography')
-        .icon(BookOpen)
-        .child(
-          S.documentTypeList('biographyTopic')
-            .title('Chapitres de biographie')
-        ),
-
-              // --- WORKS ---
-      S.listItem()
-      .title('Works')
-      .icon(Palette)
-      .child(
-        S.documentTypeList('workSection')
-          .title('Sections d\'œuvres')
-      ),
-      // --- PLANNING ---
-      S.listItem()
-
-        .title('Planning')
-        .icon(Calendar)
+        .title('Œuvres')
+        .icon(Palette)
         .child(
           S.list()
-            .title('Planning')
+            .title('Œuvres')
             .items([
-              S.documentTypeListItem('event')
-                .title('Events')
-                .icon(CalendarCheck),
-
-              S.documentTypeListItem('rehearsal')
-                .title('Rehearsals')
-                .icon(MusicNotesPlus),
+              S.documentTypeListItem('workCategory').title('Catégories').icon(Tag),
+              S.divider(),
+              // Exact order from artsparadise.net/works/
+              categoryWithSubs(S, 'workCategory-paintings', 'painting', 'Peintures sur toiles', PaintBrush),
+              categoryFlat(S, 'workCategory-drawings', 'drawing', 'Dessins, pastels et techniques mixtes', Pencil),
+              categoryFlat(S, 'workCategory-harpsichord', 'painting', 'Peintures sur clavecin', PianoKeys),
+              categoryFlat(S, 'workCategory-table', 'painting', 'Peintures sur table', Table),
+              categoryFlat(S, 'workCategory-fabric', 'appliedArt', 'Impression sur tissu', TShirt),
+              categoryFlat(S, 'workCategory-sculptures', 'sculpture', 'Sculptures', Cube),
+              categoryFlat(S, 'workCategory-colorings', 'drawing', 'Coloriages pédagogiques et thérapeutiques', Flower),
+              categoryFlat(S, 'workCategory-packages', 'appliedArt', 'Design de packagings', Package),
+              categoryFlat(S, 'workCategory-perfume-bottles', 'appliedArt', 'Flacons de parfum', Drop),
+              categoryFlat(S, 'workCategory-posters', 'appliedArt', 'Affiches événementielles', Signpost),
+              categoryFlat(S, 'workCategory-poetry', 'poem', 'Poésies', Quotes),
+              categoryFlat(S, 'workCategory-juvenilia', 'painting', 'Œuvres de jeunesse', Baby),
+              categoryFlat(S, 'workCategory-portraits', 'painting', 'Portraits', UserSquare),
+              S.divider(),
+              S.documentTypeListItem('musicalWork').title('Œuvres musicales').icon(MusicNote),
             ])
         ),
 
-      // --- MUSIC ---
+      // --- BIOGRAPHIE & LIVRES ---
       S.listItem()
-        .title('Music')
+        .title('Biographie & livres')
+        .icon(BookOpen)
+        .child(
+          S.list()
+            .title('Biographie & livres')
+            .items([
+              S.documentTypeListItem('biographyTopic')
+                .title('Chapitres de biographie')
+                .icon(BookOpen),
+              S.documentTypeListItem('book').title('Livres').icon(Books),
+            ])
+        ),
+
+      // --- CHORALES & MUSIQUE ---
+      S.listItem()
+        .title('Chorales & musique')
         .icon(MusicNotes)
         .child(
           S.list()
-            .title('Music')
+            .title('Chorales & musique')
             .items([
-              S.documentTypeListItem('song')
-                .title('Songs')
-                .icon(MusicNote),
-
-              S.documentTypeListItem('songCategory')
-                .title('Song Categories')
-                .icon(Tag),
+              S.documentTypeListItem('choirGroup').title('Chorales').icon(UsersThree),
+              S.documentTypeListItem('choirMember').title('Choristes').icon(UserCircle),
+              S.divider(),
+              S.documentTypeListItem('song').title('Chants').icon(MusicNote),
+              S.documentTypeListItem('songCategory').title('Catégories de chants').icon(Tag),
+              S.divider(),
+              S.documentTypeListItem('event').title('Événements').icon(CalendarCheck),
+              S.documentTypeListItem('rehearsal').title('Répétitions').icon(MusicNotesPlus),
             ])
         ),
 
-      // --- PEOPLE ---
+      // --- ACTUALITÉS & COMMUNICATION ---
       S.listItem()
-        .title('People')
-        .icon(Users)
-        .child(
-          S.list()
-            .title('People')
-            .items([
-              S.documentTypeListItem('choirGroup')
-                .title('Choir Groups')
-                .icon(UsersThree),
-
-              S.documentTypeListItem('choirMember')
-                .title('Choir Members')
-                .icon(UserCircle),
-            ])
-        ),
-
-      // --- NEWS ---
-      S.listItem()
-        .title('News')
+        .title('Actualités & communication')
         .icon(Megaphone)
         .child(
           S.list()
-            .title('News')
+            .title('Actualités & communication')
             .items([
-              S.documentTypeListItem('announcement')
-                .title('Announcements')
-                .icon(MegaphoneSimple),
+              S.documentTypeListItem('announcement').title('Actualités').icon(MegaphoneSimple),
+              S.documentTypeListItem('pressItem').title('Parutions presse').icon(Newspaper),
+              S.documentTypeListItem('gallery').title('Galeries photos').icon(ImageSquare),
             ])
         ),
 
-      // --- MEDIA ---
+      // --- DONS ---
+      S.documentTypeListItem('donation').title('Dons (fresque des mécènes)').icon(Heart),
+
+      S.divider(),
+
+      // --- LEGACY (à migrer puis supprimer) ---
       S.listItem()
-        .title('Media')
-        .icon(Image) // ✔️ this icon exists
+        .title('À migrer (ancien)')
+        .icon(Archive)
         .child(
           S.list()
-            .title('Media')
+            .title('À migrer (ancien)')
             .items([
-              S.documentTypeListItem('gallery')
-                .title('Photo Galleries')
-                .icon(ImageSquare), // ✔️ valid
+              S.documentTypeListItem('workSection').title("Anciennes sections d'œuvres").icon(FileText),
+              S.documentTypeListItem('biographySection')
+                .title('Anciennes sections de biographie')
+                .icon(FileText),
             ])
         ),
     ])

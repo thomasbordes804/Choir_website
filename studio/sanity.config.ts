@@ -12,6 +12,7 @@ export default defineConfig({
 
   projectId: '3j1hq2pe',
   dataset: 'production',
+  apiVersion: '2024-01-01',
 
   plugins: [
     structureTool({

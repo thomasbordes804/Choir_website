@@ -805,3 +805,60 @@ export function getBiographySectionBySlug(slug: string) {
 export function getSiteSettings() {
   return sanityFetch<SiteSettings | null>(siteSettingsQuery, {}, { revalidate: 120, tags: ["settings"] });
 }
+
+// --- Poems (works gallery poetry reading panel) ---
+// See studio/sanity/schemas/poem.ts
+
+export type Poem = {
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  dedication: string | null;
+  year: number | null;
+  /** Flattened plain text of the portable-text body, one verse per line. */
+  bodyText: string | null;
+  /** Optional recorded reading uploaded in the Studio; falls back to
+   *  browser text-to-speech when absent. */
+  audioUrl: string | null;
+};
+
+const poemsQuery = groq`
+*[_type == "poem"] | order(coalesce(year, 9999) asc, title asc) {
+  _id,
+  title,
+  "slug": slug.current,
+  dedication,
+  year,
+  "bodyText": pt::text(body),
+  "audioUrl": audio.asset->url
+}`;
+
+export function getPoems() {
+  return sanityFetch<Poem[]>(poemsQuery, {}, { ...defaultOptions, tags: ["poems"] });
+}
+
+// --- Donations ("la fresque des mécènes" on /don) ---
+// See studio/sanity/schemas/donation.ts
+
+export type Donation = {
+  _id: string;
+  donorName: string | null;
+  amount: number;
+  tier: "esquisse" | "pigment" | "fresque" | null;
+  color: string;
+  donatedAt: string | null;
+};
+
+const donationsQuery = groq`
+*[_type == "donation"] | order(coalesce(donatedAt, _createdAt) asc) {
+  _id,
+  donorName,
+  amount,
+  tier,
+  color,
+  donatedAt
+}`;
+
+export function getDonations() {
+  return sanityFetch<Donation[]>(donationsQuery, {}, { ...defaultOptions, tags: ["donations"] });
+}

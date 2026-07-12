@@ -36,6 +36,15 @@ export default defineType({
       group: 'meta',
     }),
     defineField({
+      name: 'legacyPath',
+      title: 'Chemin sur l’ancien site',
+      type: 'string',
+      readOnly: true,
+      group: 'meta',
+      description:
+        'Chemin du chapitre sur artsparadise.net (ex. « /bio/cv »). Sert à la migration automatique — ne pas modifier.',
+    }),
+    defineField({
       name: 'eyebrow',
       title: 'Sur-titre',
       type: 'string',
@@ -118,6 +127,15 @@ export default defineType({
         }),
         defineArrayMember({ type: 'videoEmbed' }),
       ],
+    }),
+    defineField({
+      name: 'subSections',
+      title: 'Sous-sections',
+      type: 'array',
+      group: 'content',
+      description:
+        'Sous-parties du chapitre (reprennent les sous-pages de l’ancien site : CV → Études, Orchestres → Quintette de France…).',
+      of: [defineArrayMember({ type: 'biographySubSection' })],
     }),
     defineField({
       name: 'relatedNews',

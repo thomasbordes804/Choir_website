@@ -408,20 +408,20 @@ a:hover {
   width: 100%;
 }
 
-* {
+.site-layout * {
   cursor: none !important;
 }
 
 /* Restore cursor for input fields and text areas */
-input,
-textarea,
-select,
-[contenteditable] {
+.site-layout input,
+.site-layout textarea,
+.site-layout select,
+.site-layout [contenteditable] {
   cursor: text !important;
 }
 
 /* Restore cursor for disabled elements */
-[disabled] {
+.site-layout [disabled] {
   cursor: not-allowed !important;
 }
 
@@ -454,4 +454,102 @@ select,
 
 .page-exit {
   animation: fadeOut 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ============================================================
+   Homepage hero & scroll animations
+   ============================================================ */
+
+/* Slow continuous zoom on the hero background video */
+@keyframes kenburns {
+  0% { transform: scale(1.05); }
+  50% { transform: scale(1.15) translate(-1%, 1%); }
+  100% { transform: scale(1.05); }
+}
+
+.animate-kenburns {
+  animation: kenburns 26s ease-in-out infinite;
+}
+
+/* Per-letter stagger for the hero name (used by HeroTitle component) */
+@keyframes heroLetterUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hand-drawn underline beneath the hero tagline */
+@keyframes drawLine {
+  from { stroke-dashoffset: 240; }
+  to { stroke-dashoffset: 0; }
+}
+
+.animate-draw-line {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: drawLine 1.4s ease 0.7s forwards;
+}
+
+/* Staggered fade-up used directly in the hero (tagline/subtitle) */
+.hero-fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* ============================================================
+   FOND « CRÈME ROSÉE » (option 1d)
+   Palette : fond #f5efe9 · cartes #fcf8f4 · filets #e8ded4
+   Re-teinte tous les fonds blancs/beiges du site (accueil, communication,
+   contact, œuvres, cartes de la gazette…) sans toucher aux pages.
+   ============================================================ */
+
+:root {
+  /* beige plus affirmé — les tons précédents (#f5efe9 etc.) étaient trop
+     proches du blanc pour être perçus. */
+  --background: #f0e8da;
+  --paper: #f0e8da;        /* fond des zones de contenu */
+  --paper-card: #f8f3ea;   /* cartes / encadrés, un ton plus clair */
+  --paper-border: #e0d0b3; /* filets et bordures assortis */
+}
+
+/* Empêche le mode "forced-colors" (contraste élevé Windows/navigateur) de
+   remapper nos teintes personnalisées vers blanc/noir système — un beige
+   clair se fait sinon aplatir en blanc alors qu'un noir reste reconnaissable,
+   ce qui explique un fond qui "ne marche jamais" tant qu'il n'est pas sombre. */
+html,
+body,
+.site-layout,
+.site-layout * {
+  forced-color-adjust: none;
+}
+
+/* Le corps de page (dégradés compris) prend la teinte crème rosée */
+body {
+  background-color: var(--paper) !important;
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(141, 30, 17, 0.03), transparent 55%),
+    radial-gradient(circle at 85% 75%, rgba(99, 96, 152, 0.025), transparent 55%);
+}
+
+/* Sections de contenu aujourd'hui en blanc pur (accueil, communication,
+   contact, œuvres, cartes de la gazette…) */
+.site-layout .bg-white {
+  background-color: var(--paper-card) !important;
+}
+
+/* Les grands aplats beige existants s'alignent sur la même crème */
+.site-layout .bg-\[\#edeae6\] {
+  background-color: var(--paper) !important;
+}
+
+/* Filets gris-zinc → filets crème assortis (bordures de cartes, séparateurs) */
+.site-layout .border-zinc-200 {
+  border-color: var(--paper-border) !important;
+}
+
+/* EXCEPTIONS — petits éléments décoratifs qui doivent rester blanc pur :
+   traits de soulignement du header et pastilles. Ils utilisent bg-white
+   sur fond sombre ; on les restaure explicitement. */
+.site-layout header .bg-white,
+.site-layout nav .bg-white {
+  background-color: #ffffff !important;
 }

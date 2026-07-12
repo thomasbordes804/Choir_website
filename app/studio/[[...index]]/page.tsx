@@ -1,9 +1,8 @@
 'use client'
 
-import React from "react"
-import { NextStudio } from "next-sanity/studio"
-import config from "../../../studio/sanity.config"
+import { NextStudio } from 'next-sanity/studio'
+import config from '../../../studio/sanity.config'
 
-export default function StudioClient() {
+export default function StudioPage() {
   return <NextStudio config={config} />
 }
