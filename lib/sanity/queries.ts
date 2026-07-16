@@ -77,28 +77,6 @@ export type VideoEmbedValue = {
   poster?: SanityImageAsset | null;
 };
 
-export type BiographyMediaImage = SanityImageAsset & { _type: "image"; _key?: string | null };
-export type BiographyMediaVideo = VideoEmbedValue & { _type: "videoEmbed"; _key?: string | null };
-export type BiographyMedia = BiographyMediaImage | BiographyMediaVideo;
-
-export type BiographyTopicSummary = {
-  _id: string;
-  title: string | null;
-  slug: string | null;
-  eyebrow: string | null;
-  summary: string | null;
-  order: number | null;
-  heroImage: SanityImageAsset | null;
-  heroVideo: VideoEmbedValue | null;
-  intro: PortableTextValue;
-  relatedNews: AnnouncementSummary[];
-};
-
-export type BiographyTopicDetail = BiographyTopicSummary & {
-  body: PortableTextValue;
-  mediaGallery: BiographyMedia[];
-};
-
 export type BiographySection = {
   _id: string;
   title: string | null;
@@ -124,15 +102,6 @@ export type BiographyPage = {
   _id: string;
   title: string | null;
   content: PortableTextValue;
-};
-
-export type AnnouncementSummary = {
-  _id: string;
-  title: string | null;
-  slug: string | null;
-  publishedAt: string | null;
-  excerpt: string | null;
-  body?: PortableTextValue; // Add body field
 };
 
 const defaultOptions: SanityFetchOptions = {
@@ -195,168 +164,6 @@ const announcementsQuery = groq`
   highlight,
   "excerpt": pt::text(body),
   body  // Make sure body is included
-}`;
-
-const biographyTopicsQuery = groq`
-*[_type == "biographyTopic"] | order(coalesce(order, 999) asc, title asc) {
-  _id,
-  title,
-  "slug": slug.current,
-  eyebrow,
-  summary,
-  order,
-  "heroImage": heroImage{
-    "_type": "image",
-    "url": asset->url,
-    "width": asset->metadata.dimensions.width,
-    "height": asset->metadata.dimensions.height,
-    "alt": coalesce(alt, asset->altText),
-    "caption": coalesce(caption, asset->description)
-  },
-  "heroVideo": heroVideo{
-    _type,
-    title,
-    url,
-    platform,
-    description,
-    "poster": poster.asset->{
-      url,
-      "width": metadata.dimensions.width,
-      "height": metadata.dimensions.height,
-      "alt": null,
-      "caption": null
-    }
-  },
-  intro[0...3]{
-    ...,
-    _type == "image" => {
-      ...,
-      "url": asset->url,
-      "width": asset->metadata.dimensions.width,
-      "height": asset->metadata.dimensions.height,
-      "alt": coalesce(alt, asset->altText),
-      "caption": coalesce(caption, asset->description)
-    },
-    _type == "videoEmbed" => {
-      ...,
-      "poster": poster.asset->{
-        url,
-        "width": metadata.dimensions.width,
-        "height": metadata.dimensions.height,
-        "alt": null,
-        "caption": null
-      }
-    }
-  },
-  relatedNews[]->{
-    _id,
-    title,
-    "slug": slug.current,
-    publishedAt,
-    "excerpt": pt::text(body)
-  }
-}`;
-
-const biographyTopicBySlugQuery = groq`
-*[_type == "biographyTopic" && slug.current == $slug][0] {
-  _id,
-  title,
-  "slug": slug.current,
-  eyebrow,
-  summary,
-  order,
-  "heroImage": heroImage{
-    "_type": "image",
-    "url": asset->url,
-    "width": asset->metadata.dimensions.width,
-    "height": asset->metadata.dimensions.height,
-    "alt": coalesce(alt, asset->altText),
-    "caption": coalesce(caption, asset->description)
-  },
-  "heroVideo": heroVideo{
-    _type,
-    title,
-    url,
-    platform,
-    description,
-    "poster": poster.asset->{
-      url,
-      "width": metadata.dimensions.width,
-      "height": metadata.dimensions.height,
-      "alt": null,
-      "caption": null
-    }
-  },
-  intro[]{
-    ...,
-    _type == "image" => {
-      ...,
-      "url": asset->url,
-      "width": asset->metadata.dimensions.width,
-      "height": asset->metadata.dimensions.height,
-      "alt": coalesce(alt, asset->altText),
-      "caption": coalesce(caption, asset->description)
-    },
-    _type == "videoEmbed" => {
-      ...,
-      "poster": poster.asset->{
-        url,
-        "width": metadata.dimensions.width,
-        "height": metadata.dimensions.height,
-        "alt": null,
-        "caption": null
-      }
-    }
-  },
-  body[]{
-    ...,
-    _type == "image" => {
-      ...,
-      "url": asset->url,
-      "width": asset->metadata.dimensions.width,
-      "height": asset->metadata.dimensions.height,
-      "alt": coalesce(alt, asset->altText),
-      "caption": coalesce(caption, asset->description)
-    },
-    _type == "videoEmbed" => {
-      ...,
-      "poster": poster.asset->{
-        url,
-        "width": metadata.dimensions.width,
-        "height": metadata.dimensions.height,
-        "alt": null,
-        "caption": null
-      }
-    }
-  },
-  "mediaGallery": mediaGallery[]{
-    ...,
-    _type == "image" => {
-      ...,
-      "url": asset->url,
-      "width": asset->metadata.dimensions.width,
-      "height": asset->metadata.dimensions.height,
-      "alt": coalesce(alt, asset->altText),
-      "caption": coalesce(caption, asset->description)
-    },
-    _type == "videoEmbed" => {
-      ...,
-      "poster": poster.asset->{
-        url,
-        "width": metadata.dimensions.width,
-        "height": metadata.dimensions.height,
-        "alt": null,
-        "caption": null
-      }
-    }
-  },
-  relatedNews[]->{
-    _id,
-    title,
-    "slug": slug.current,
-    publishedAt,
-    "excerpt": pt::text(body)
-  }
 }`;
 
 const biographyPageQuery = groq`
@@ -486,118 +293,6 @@ const videosPageQuery = groq`
   }
 }`;
 
-const booksPageQuery = groq`
-*[_type == "page" && slug.current == "books"][0]{
-  _id,
-  title,
-  description,
-  content[]{
-    ...,
-    _type == "image" => {
-      ...,
-      "url": asset->url,
-      "width": asset->metadata.dimensions.width,
-      "height": asset->metadata.dimensions.height,
-      "alt": coalesce(alt, asset->altText),
-      "caption": coalesce(caption, asset->description)
-    },
-    _type == "videoEmbed" => {
-      ...,
-      "poster": poster.asset->{
-        url,
-        "width": metadata.dimensions.width,
-        "height": metadata.dimensions.height,
-        "alt": null,
-        "caption": null
-      }
-    }
-  },
-  "books": books[]{
-    slug,
-    coverImagePath,
-    title,
-    subtitle,
-    authors,
-    publisher,
-    publicationDate,
-    "galleryImages": galleryImages[]{
-      url,
-      alt,
-      caption
-    },
-    description[]{
-      ...,
-      _type == "image" => {
-        ...,
-        "url": asset->url,
-        "width": asset->metadata.dimensions.width,
-        "height": asset->metadata.dimensions.height,
-        "alt": coalesce(alt, asset->altText),
-        "caption": coalesce(caption, asset->description)
-      }
-    },
-    additionalContent[]{
-      ...,
-      _type == "image" => {
-        ...,
-        "url": asset->url,
-        "width": asset->metadata.dimensions.width,
-        "height": asset->metadata.dimensions.height,
-        "alt": coalesce(alt, asset->altText),
-        "caption": coalesce(caption, asset->description)
-      }
-    },
-    "coverImage": coverImage{
-      "url": asset->url,
-      "width": asset->metadata.dimensions.width,
-      "height": asset->metadata.dimensions.height,
-      "alt": coalesce(alt, asset->altText)
-    },
-    "purchaseLinks": purchaseLinks[]{
-      label,
-      url
-    }
-  }
-}`;
-
-export async function getBooksPage() {
-  return sanityFetch<{
-    _id: string;
-    title: string | null;
-    description: string | null;
-    content: PortableTextValue;
-    books: Array<{
-      slug?: string;
-      coverImagePath?: string;
-      title: string;
-      subtitle?: string;
-      authors?: string[];
-      publisher?: string;
-      publicationDate?: string;
-      galleryImages?: Array<{
-        url: string;
-        alt?: string;
-        caption?: string;
-      }>;
-      description: PortableTextValue;
-      additionalContent?: PortableTextValue;
-      coverImage?: {
-        url: string;
-        width: number;
-        height: number;
-        alt?: string;
-      };
-      purchaseLinks?: Array<{
-        label: string;
-        url: string;
-      }>;
-    }>;
-  } | null>(booksPageQuery, {}, { 
-    revalidate: 0,
-    tags: ["books", "page"] 
-  });
-}
-
 const worksPageQuery = groq`
 *[_type == "page" && slug.current == "works"][0]{
   _id,
@@ -614,68 +309,6 @@ const worksSectionsQuery = groq`
   order
 }`;
 
-const worksSectionBySlugQuery = groq`
-*[_type == "workSection" && slug.current == $slug][0] {
-  _id,
-  title,
-  "slug": slug.current,
-  description,
-  order,
-  content[]{
-    ...,
-    _type == "image" => {
-      ...,
-      "url": asset->url,
-      "width": asset->metadata.dimensions.width,
-      "height": asset->metadata.dimensions.height,
-      "alt": coalesce(alt, asset->altText),
-      "caption": coalesce(caption, asset->description)
-    },
-    _type == "videoEmbed" => {
-      ...,
-      "poster": poster.asset->{
-        url,
-        "width": metadata.dimensions.width,
-        "height": metadata.dimensions.height,
-        "alt": null,
-        "caption": null
-      }
-    }
-  },
-  "images": images[]{
-    "url": asset->url,
-    "width": asset->metadata.dimensions.width,
-    "height": asset->metadata.dimensions.height,
-    "alt": coalesce(alt, asset->altText),
-    "caption": caption
-  },
-  "subsections": subsections[]{
-    title,
-    "slug": slug.current,
-    content[]{
-      ...,
-      _type == "image" => {
-        ...,
-        "url": asset->url,
-        "width": asset->metadata.dimensions.width,
-        "height": asset->metadata.dimensions.height,
-        "alt": coalesce(alt, asset->altText),
-        "caption": coalesce(caption, asset->description)
-      },
-      _type == "videoEmbed" => {
-        ...,
-        "poster": poster.asset->{
-          url,
-          "width": metadata.dimensions.width,
-          "height": metadata.dimensions.height,
-          "alt": null,
-          "caption": null
-        }
-      }
-    }
-  }
-}`;
-
 export type WorksPage = {
   _id: string;
   title: string | null;
@@ -690,28 +323,6 @@ export type WorksSection = {
   order: number | null;
 };
 
-export type WorksSectionDetail = {
-  _id: string;
-  title: string | null;
-  slug: string | null;
-  description: string | null;
-  order: number | null;
-  content: PortableTextValue;
-  images: Array<{
-    url: string;
-    width: number;
-    height: number;
-    alt?: string;
-    caption?: string;
-  }>;
-
-subsections: Array<{
-    title: string;
-    slug: string | null;
-    content: PortableTextValue;
-  }>;
-};
-
 export function getWorksPage() {
   return sanityFetch<WorksPage | null>(worksPageQuery, {}, { 
     revalidate: 0, // Force revalidation
@@ -724,29 +335,6 @@ export function getWorksSections() {
     revalidate: 0, // Force revalidation
     tags: ["works"] 
   });
-}
-
-export function getWorksSectionBySlug(slug: string) {
-  return sanityFetch<WorksSectionDetail | null>(worksSectionBySlugQuery, { slug }, { 
-    revalidate: 0, // Force revalidation
-    tags: ["works"] 
-  });
-}
-
-export async function getBookBySlug(slug: string) {
-  const booksPage = await getBooksPage();
-  const books = booksPage?.books || [];
-  
-  const book = books.find((b: any) => b.slug === slug);
-  
-  if (!book) {
-    return null;
-  }
-
-  return {
-    ...book,
-    coverImagePath: book.coverImagePath || book.coverImage?.url,
-  };
 }
 
 export async function getVideosPage() {
@@ -780,14 +368,6 @@ export function getHighlightedAnnouncements(limit = 3) {
 
 export function getAnnouncements(limit = 24) {
   return sanityFetch<Announcement[]>(announcementsQuery, { limit }, { ...defaultOptions, tags: ["announcements"] });
-}
-
-export function getBiographyTopics() {
-  return sanityFetch<BiographyTopicSummary[]>(biographyTopicsQuery, {}, { ...defaultOptions, tags: ["biography"] });
-}
-
-export function getBiographyTopicBySlug(slug: string) {
-  return sanityFetch<BiographyTopicDetail | null>(biographyTopicBySlugQuery, { slug }, { ...defaultOptions, tags: ["biography"] });
 }
 
 export function getBiographyPage() {

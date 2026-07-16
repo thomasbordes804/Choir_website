@@ -1,214 +1,47 @@
 {
-  
-
-"name": "church-choir-site",
-  
-
-"version": "0.1.0",
-  
-
-"private": true,
-  
-
-"scripts": {
-  
-
-  
-
-"dev": "next dev",
-  
-
-  
-
-"build": "next build",
-  
-
-  
-
-"start": "next start",
-  
-
-  
-
-"studio:dev": "cd studio && sanity start",
-  
-
-  
-
-"studio:build": "cd studio && sanity build",
-  
-
-  
-
-"studio:deploy": "cd studio && sanity deploy",
-  
-
-  
-
-"lint": "eslint",
-  
-
-  
-
-"seed:biography-sections": "tsx scripts/seed-biography-sections.ts",
-  
-
-  
-
-"seed:videos": "tsx scripts/seed-videos.ts",
-  
-
-  
-
-"seed:books": "tsx scripts/seed-books.ts",
-  
-
-  
-
-"seed:grand-paris-announcements": "tsx scripts/seed-grand-paris-announcements.ts",
-  
-
-  
-
-"seed:works-sections": "tsx scripts/seed-works-sections.ts",
-
-
-
-
-"seed:taxonomy": "tsx scripts/seed-taxonomy.ts",
-
-
-
-
-"seed:biography": "tsx scripts/import-biography.ts"
-  
-
-},
-  
-
-"dependencies": {
-  
-
-  
-
-"@portabletext/react": "^6.0.0",
-  
-
-  
-
-"@sanity/client": "^7.12.1",
-  
-
-  
-
-"@sanity/image-url": "^1.2.0",
-  
-
-  
-
-"@sanity/vision": "^4.15.0",
-  
-
-  
-
-"clsx": "^2.1.1",
-  
-
-  
-
-"lucide-react": "^0.553.0",
-  
-
-  
-
-"next": "^16.1.4",
-  
-
-  
-
-"next-sanity": "^11.6.6",
-  
-
-  
-
-"phosphor-react": "^1.4.1",
-  
-
-  
-
-"react": "19.2.0",
-  
-
-  
-
-"react-dom": "19.2.0",
-  
-
-  
-
-"tailwind-merge": "^3.4.0"
-  
-
-},
-  
-
-"devDependencies": {
-  
-
-  
-
-"@tailwindcss/postcss": "^4",
-  
-
-  
-
-"@types/node": "^20",
-  
-
-  
-
-"@types/react": "^19",
-  
-
-  
-
-"@types/react-dom": "^19",
-  
-
-  
-
-"baseline-browser-mapping": "^2.9.17",
-  
-
-  
-
-"dotenv": "^17.2.3",
-  
-
-  
-
-"eslint": "^9",
-  
-
-  
-
-"eslint-config-next": "16.0.3",
-  
-
-  
-
-"tailwindcss": "^4",
-  
-
-  
-
-"tsx": "^4.21.0",
-  
-
-  
-
-"typescript": "^5"
-  
-
-}
+  "name": "church-choir-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "studio:dev": "cd studio && sanity start",
+    "studio:build": "cd studio && sanity build",
+    "studio:deploy": "cd studio && sanity deploy",
+    "lint": "eslint",
+    "seed:biography-sections": "tsx scripts/seed-biography-sections.ts",
+    "seed:videos": "tsx scripts/seed-videos.ts",
+    "seed:books": "tsx scripts/seed-books.ts",
+    "seed:grand-paris-announcements": "tsx scripts/seed-grand-paris-announcements.ts",
+    "seed:works-sections": "tsx scripts/seed-works-sections.ts",
+    "seed:taxonomy": "tsx scripts/seed-taxonomy.ts",
+    "seed:biography": "tsx scripts/import-biography.ts"
+  },
+  "dependencies": {
+    "@portabletext/react": "^6.0.0",
+    "@sanity/client": "^7.12.1",
+    "@sanity/vision": "^4.15.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.553.0",
+    "next": "^16.1.4",
+    "next-sanity": "^11.6.6",
+    "phosphor-react": "^1.4.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "baseline-browser-mapping": "^2.9.17",
+    "dotenv": "^17.2.3",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.3",
+    "tailwindcss": "^4",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
 }

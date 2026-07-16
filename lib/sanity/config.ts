@@ -14,5 +14,3 @@ export const sanityConfig = {
     process.env.REACT_APP_SANITY_API_TOKEN ||
     undefined,
 };
-
-console.log("SANITY PROJECT", process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, process.env.SANITY_PROJECT_ID);

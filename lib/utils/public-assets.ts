@@ -6,7 +6,7 @@
  */
 
 // Main folder paths
-export const PUBLIC_FOLDERS = {
+const PUBLIC_FOLDERS = {
     // Biography
     biography: '/biographie',
     cv: '/CV',
@@ -351,10 +351,10 @@ export const PUBLIC_FOLDERS = {
    * @returns Array of full image paths
    */
   export function getImagesFromFolder(
-    folderConfig: { 
-      basePath: string; 
-      files?: string[]; 
-      pattern?: (i: number) => string; 
+    folderConfig: {
+      basePath: string;
+      files?: readonly string[];
+      pattern?: (i: number) => string;
       count?: number;
     },
     limit?: number
@@ -373,32 +373,6 @@ export const PUBLIC_FOLDERS = {
     }
     
     return [];
-  }
-  
-  /**
-   * Get a single representative image from a folder
-   * @param folderConfig - Folder configuration object
-   * @param index - Optional index (default: 0 for first image)
-   * @returns Full image path or null
-   */
-  export function getSingleImageFromFolder(
-    folderConfig: { 
-      basePath: string; 
-      files?: string[]; 
-      pattern?: (i: number) => string; 
-      count?: number;
-    },
-    index: number = 0
-  ): string | null {
-    if (folderConfig.files && folderConfig.files.length > index) {
-      return `${folderConfig.basePath}/${folderConfig.files[index]}`;
-    }
-    
-    if (folderConfig.pattern && folderConfig.count && index < folderConfig.count) {
-      return `${folderConfig.basePath}/${folderConfig.pattern(index)}`;
-    }
-    
-    return null;
   }
   
   /**
@@ -466,29 +440,3 @@ export const PUBLIC_FOLDERS = {
     return null;
   }
   
-  /**
-   * Get a single representative image for a subsection label
-   * @param label - Subsection label
-   * @returns Full image path or default fallback
-   */
-  export function getSubsectionImagePath(label: string): string {
-    // Default fallback
-    return '/biographie/portrait.webp';
-  }
-  
-  /**
-   * Get multiple images for a subsection label (for rotating images)
-   * @param label - Subsection label
-   * @param count - Number of images to return (default: 4)
-   * @returns Array of image paths
-   */
-  export function getSubsectionImagePaths(label: string, count: number = 4): string[] {
-    const folderConfig = getFolderForSubsection(label);
-    // Default fallback
-    return Array(count).fill('/biographie/portrait.webp');
-  }
-  
-  // Export all folder keys for easy access
-  export type FolderKey = keyof typeof FOLDER_IMAGES;
-  export type OeuvresSubfolderKey = keyof typeof PUBLIC_FOLDERS.oeuvresSubfolders;
-  export type PeinturesSubfolderKey = keyof typeof PUBLIC_FOLDERS.peinturesSurToilesSubfolders;

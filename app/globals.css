@@ -505,10 +505,10 @@ a:hover {
 :root {
   /* beige plus affirmé — les tons précédents (#f5efe9 etc.) étaient trop
      proches du blanc pour être perçus. */
-  --background: #f0e8da;
-  --paper: #f0e8da;        /* fond des zones de contenu */
-  --paper-card: #f8f3ea;   /* cartes / encadrés, un ton plus clair */
-  --paper-border: #e0d0b3; /* filets et bordures assortis */
+  --background: #f7f3ec;
+  --paper: #f7f3ec;        /* fond des zones de contenu */
+  --paper-card: #fbf8f4;   /* cartes / encadrés, un ton plus clair */
+  --paper-border: #e8ddc8; /* filets et bordures assortis */
 }
 
 /* Empêche le mode "forced-colors" (contraste élevé Windows/navigateur) de
