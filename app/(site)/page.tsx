@@ -47,48 +47,6 @@ export default async function Home() {
     siteSettings?.homepageHeroSubtitle ??
     "Altiste-peintre et musicien au service des communautés";
 
-  // Sections avec leurs couleurs minimalistes - matching navigation bar
-  const sections = [
-    {
-      title: "Actualités",
-      href: "/actuality",
-      description: "Découvrez les dernières nouvelles",
-      count: highlights.length,
-      label: highlights.length === 1 ? "actualité" : "actualités",
-      image: "/showcase/actualité/actualités_2.jpg", // Add your image path here
-    },
-    {
-      title: "Œuvres",
-      href: "/works",
-      description: "Peintures, sculptures et créations",
-      image: "/showcase/oeuvres/oeuvres.jpg", // Add your image path here
-    },
-    {
-      title: "Biographie",
-      href: "/biography",
-      description: "Explorez le parcours artistique",
-      image: "/showcase/biographie/biographie.jpg", // Add your image path here
-    },
-    {
-      title: "Communication",
-      href: "/communication",
-      description: "Médias et événements",
-      image: "/showcase/communication/communication.jpg", // Add your image path here
-    },
-    {
-      title: "Partenariat",
-      href: "/partenariat",
-      description: "Collaborations et partenaires",
-      image: "/showcase/partenariat/partenariat.jpg", // Add your image path here
-    },
-    {
-      title: "Contact",
-      href: "/contact",
-      description: "Prenez contact avec nous",
-      image: "/showcase/contact/contact.jpg", // Add your image path here
-    },
-  ];
-
   const featuredEvent = siteSettings?.featuredEvent ?? upcomingEvents[0] ?? null;
 
   return (
@@ -151,91 +109,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Catalogue Section — « La Portée » (design 1b, fond « Blanc galerie ») */}
-      <section className="relative py-24 px-6 lg:px-8 border-t border-zinc-200 bg-[#fbfaf8] overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <ScrollReveal className="mb-8 text-center">
-            <div className="inline-block mb-4 text-xs uppercase tracking-[0.35em] text-zinc-500 font-light">
-              Catalogue
-            </div>
-            <h2 className="text-5xl sm:text-6xl md:text-7xl font-normal italic tracking-tight text-zinc-950">
-              Explorez l'Univers
-            </h2>
-            {/* Hand-drawn coral underline — smaller than the hero's since this
-                is a section subtitle, not the primary title */}
-            <svg
-              width="160"
-              height="12"
-              viewBox="0 0 160 12"
-              className="block mx-auto mt-5"
-              aria-hidden="true"
-            >
-              <path
-                d="M2 7 Q80 2 158 7"
-                fill="none"
-                stroke="#ff8a8a"
-                strokeWidth={2}
-                strokeLinecap="round"
-                className="animate-draw-line"
-              />
-            </svg>
-          </ScrollReveal>
-
-          {/* Arched cards on a musical stagger */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-11 gap-y-10 items-start">
-            {sections.map((section, index) => {
-              // Rhythm of the staff line: 0 / down / slightly down, repeated
-              const lift = ["lg:mt-0", "lg:mt-14", "lg:mt-6"][index % 3];
-              return (
-                <ScrollReveal key={section.href} delay={index * 90}>
-                  <Link href={section.href} className={`group block ${lift}`}>
-                    {/* Arched image */}
-                    <div className="overflow-hidden rounded-t-full aspect-[3/4] shadow-[0_18px_44px_rgba(26,26,26,0.10)] transition-all duration-500 ease-out group-hover:-translate-y-2.5 group-hover:shadow-[0_30px_60px_rgba(26,26,26,0.18)]">
-                      <div
-                        className="w-full h-full bg-cover bg-center transition-transform duration-[1400ms] ease-out group-hover:scale-[1.07]"
-                        style={{
-                          backgroundImage: `url(${section.image || `/home_page/home_page_${Math.min(index + 2, 6)}.jpg`})`,
-                        }}
-                      />
-                    </div>
-
-                    {/* Label */}
-                    <div className="pt-6 px-2 text-center">
-                      <div className="flex items-center justify-center gap-3.5 mb-2">
-                        <span className="w-[22px] h-px bg-[#ff8a8a]" />
-                        <span className="text-2xl font-medium text-zinc-900">
-                          {section.title}
-                        </span>
-                        <span className="w-[22px] h-px bg-[#ff8a8a]" />
-                      </div>
-                      <div className="text-[15px] italic text-zinc-500 leading-relaxed">
-                        {section.description}
-                      </div>
-                      {section.count !== undefined && (
-                        <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-zinc-400 font-sans">
-                          {section.count} {section.label}
-                        </div>
-                      )}
-                    </div>
-                  </Link>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-
-          {/* View all — pill button */}
-          <div className="text-center mt-20">
-            <Link
-              href="/works"
-              className="inline-block text-sm uppercase tracking-[0.25em] text-zinc-700 font-sans font-light border border-zinc-900 rounded-full px-9 py-3.5 transition-colors duration-400 hover:bg-zinc-900 hover:text-[#faf9f6]"
-            >
-              Voir tout →
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Dynamic Video Section - BOYD style transition */}
       <section className="relative w-full min-h-[100vh] flex items-center justify-center">
         <VideoBackground 
@@ -263,6 +136,75 @@ export default async function Home() {
             />
           </svg>
         </ScrollReveal>
+      </section>
+
+      {/* En ce moment à l'atelier — 7c */}
+      <section className="relative py-24 px-6 lg:px-8 border-t border-zinc-200 bg-[#fbfaf8]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-14 lg:gap-16 items-center">
+          {/* Œuvre du moment — cadre galerie */}
+          <ScrollReveal>
+            <div className="group">
+              <div className="overflow-hidden bg-white p-4 shadow-[0_24px_60px_rgba(26,26,26,0.16)]">
+                <div className="overflow-hidden aspect-[4/3]">
+                  <div
+                    className="w-full h-full bg-cover bg-center transition-transform duration-[1400ms] ease-out group-hover:scale-[1.05]"
+                    style={{ backgroundImage: "url(/showcase/tableau.png)" }}
+                  />
+                </div>
+              </div>
+              <div className="text-center mt-4 text-sm italic text-zinc-500">
+                L'œuvre du moment — huile sur toile
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Ce qui occupe Michel cette saison */}
+          <ScrollReveal delay={120}>
+            <div className="mb-4 text-xs uppercase tracking-[0.35em] text-zinc-500 font-light">
+              En ce moment
+            </div>
+            <h2 className="text-4xl sm:text-5xl italic font-normal tracking-tight text-zinc-900 leading-[1.25] mb-7">
+              À l'atelier,
+              <br />
+              cette saison
+            </h2>
+
+            <div className="flex flex-col">
+              {[
+                {
+                  title: "Nouvelle série de toiles",
+                  desc: "Paysages intérieurs — en cours à l'atelier, exposition prévue à l'automne.",
+                },
+                {
+                  title: "Récital d'orgue",
+                  desc: "Prochain concert en église — programme Bach et improvisations.",
+                },
+                {
+                  title: "Ateliers en maison de retraite",
+                  desc: "La musique et la peinture partagées chaque semaine avec les résidents.",
+                },
+              ].map((n) => (
+                <div
+                  key={n.title}
+                  className="grid grid-cols-[26px_1fr] gap-4 py-4 border-b border-[#eceae5] items-baseline"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[#ff8a8a] justify-self-center -translate-y-0.5" />
+                  <div>
+                    <div className="text-[19px] font-medium text-zinc-900 mb-1">{n.title}</div>
+                    <div className="text-[15px] text-zinc-500 leading-relaxed">{n.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              href="/works"
+              className="inline-block mt-8 text-xs uppercase tracking-[0.25em] text-zinc-700 border border-zinc-900 rounded-full px-8 py-3.5 transition-colors duration-400 hover:bg-zinc-900 hover:text-[#faf9f6]"
+            >
+              Découvrir les œuvres →
+            </Link>
+          </ScrollReveal>
+        </div>
       </section>
 
       {/* Latest Announcements - minimal style */}

@@ -11,14 +11,6 @@ export const sanityClient = createClient({
   token: sanityConfig.token,
 })
 
-const copyrightNotice = process.env.NODE_ENV === "development"
-  ? "Using Sanity preview CDN is disabled in development to ensure fresh data."
-  : undefined;
-
-if (copyrightNotice) {
-  console.debug(copyrightNotice);
-}
-
 export type SanityFetchOptions = {
   /**
    * Configure Next.js caching behaviour. Defaults to 60 seconds.

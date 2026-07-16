@@ -19,27 +19,6 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const worksSubsections = [
-    { href: "/works/peinture-sur-toiles", label: "Peinture sur toiles" },
-    { href: "/works/peinture-sur-table", label: "Peinture sur table" },
-    { href: "/works/peinture-personnages", label: "Peinture sur clavecin" },
-    { href: "/works/composition-musicale", label: "Composition musicale" },
-    { href: "/works/chants", label: "Chants" },
-    { href: "/works/chorale-de-sucy-en-brie", label: "Chorale de Sucy en Brie" },
-    { href: "/works/chorale-de-bondy", label: "Chorale de Bondy" },
-    { href: "/works/chorale-dorly", label: "Chorale d'Orly" },
-    { href: "/works/poesies", label: "Poésies" },
-    { href: "/works/dessins", label: "Dessins, pastels et techniques mixtes" },
-    { href: "/works/sculptures", label: "Sculptures" },
-    { href: "/works/portraits", label: "Portraits" },
-    { href: "/works/impression-sur-tissu", label: "Impression sur tissu" },
-    { href: "/works/coloriages", label: "Coloriages pédagogiques et thérapeutiques" },
-    { href: "/works/design-packaging", label: "Design de packagings" },
-    { href: "/works/flacon-parfums", label: "Flacon de parfums" },
-    { href: "/works/affiches-evenementielles", label: "Affiches évènementielles" },
-    { href: "/works/oeuvres-jeunesse", label: "Oeuvres de jeunesse" },
-  ];
-
   return (
     <div className={`${playfairDisplay.variable} site-layout`}>
       <MusicSystemProvider>
@@ -83,7 +62,7 @@ export default async function SiteLayout({
                 </div>
 
                 <div className="flex items-center flex-shrink-0">
-                  <MainNav worksSubsections={worksSubsections} />
+                  <MainNav />
                 </div>
               </div>
 
