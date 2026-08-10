@@ -37,7 +37,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Neutral background that blends with main_background.png */
+    /* Neutral background */
     --background: #faf9f6; /* Same neutral beige - no purple! */
     --foreground: #1a1a1a;
     
@@ -67,7 +67,7 @@ body {
   margin: 0;
   min-height: 100vh;
   background-color: #faf9f6; /* Neutral warm beige - no purple tones */
-  /* Very subtle, neutral gradient background that blends with main_background.png */
+  /* Very subtle, neutral gradient background */
   background-image: 
     /* Very subtle warm beige gradients - completely neutral */
     radial-gradient(circle at 10% 20%, rgba(250, 249, 246, 0.2), transparent 50%),

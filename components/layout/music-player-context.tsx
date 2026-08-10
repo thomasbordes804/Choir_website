@@ -10,13 +10,11 @@ export interface MusicTrack {
   coverImage?: string;
 }
 
-// The site's real playlist. Colors are new (used by the candle/sun dots) —
-// swap them for your own palette if you'd rather.
+// The site's playlist — original compositions only (no licensed material).
+// Colors are used by the candle/sun dots.
 export const MUSIC_TRACKS: MusicTrack[] = [
   { id: 'last-dream', title: 'Last Dream', path: '/media/last-dream.mp3', color: '#ff6b6b', coverImage: '/Musiques/Last Dream - song.png' },
   { id: 'yura-yura', title: 'Yura Yura', path: '/media/Yura yura.mp3', color: '#a8a7d4', coverImage: '/Musiques/Yura yura - song.png' },
-  { id: 'the-journey', title: 'The Journey', path: '/media/Tom Misch - The Journey.mp3', color: '#636098', coverImage: '/Musiques/Yura yura - song.png' },
-  { id: 'photograph', title: 'Photograph', path: '/media/Ed Sheeran - Photograph.mp3', color: '#8d1e11', coverImage: '/Musiques/Yura yura - song.png' },
 ];
 
 interface MusicPlayerValue {

@@ -1,5 +1,5 @@
 {
-  "name": "church-choir-site",
+  "name": "choir-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,14 +9,7 @@
     "studio:dev": "cd studio && sanity start",
     "studio:build": "cd studio && sanity build",
     "studio:deploy": "cd studio && sanity deploy",
-    "lint": "eslint",
-    "seed:biography-sections": "tsx scripts/seed-biography-sections.ts",
-    "seed:videos": "tsx scripts/seed-videos.ts",
-    "seed:books": "tsx scripts/seed-books.ts",
-    "seed:grand-paris-announcements": "tsx scripts/seed-grand-paris-announcements.ts",
-    "seed:works-sections": "tsx scripts/seed-works-sections.ts",
-    "seed:taxonomy": "tsx scripts/seed-taxonomy.ts",
-    "seed:biography": "tsx scripts/import-biography.ts"
+    "lint": "eslint"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.0",
@@ -37,11 +30,9 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.9.17",
-    "dotenv": "^17.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
     "tailwindcss": "^4",
-    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
