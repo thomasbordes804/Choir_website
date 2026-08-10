@@ -87,10 +87,9 @@ export default async function WorksPage() {
     <div className="relative min-h-screen bg-[#edeae6]">
       {/* Hero Section with Video Background - Matching Biography pattern */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* No dedicated hero video for this page — gradients only, over the image below */}
-        <TopVideoTemplate />
+        <TopVideoTemplate videoSrc="/oeuvres/piano_background.mp4" />
 
-        {/* Hero Image */}
+        {/* Fallback Image */}
         <div className="absolute inset-0 w-full h-full" style={{ zIndex: -1 }}>
           <Image
             src={worksImages[0]}
