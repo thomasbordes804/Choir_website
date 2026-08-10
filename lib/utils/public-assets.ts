@@ -77,7 +77,6 @@ const PUBLIC_FOLDERS = {
         'home_page_1.jpg',
         'home_page_2.jpg',
         'home_page_3.jpg',
-        'home_page_4.jpg',
         'home_page_5.jpg',
         'home_page_6.jpg',
       ],

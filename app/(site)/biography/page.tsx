@@ -30,7 +30,7 @@ const biographyImages = [
   "/biographie/portrait.webp",
   "/home_page/home_page_2.jpg",
   "/home_page/home_page_3.jpg",
-  "/home_page/home_page_4.jpg",
+  "/home_page/home_page_1.jpg",
 ];
 
 export default async function BiographyPage() {

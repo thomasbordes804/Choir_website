@@ -3,7 +3,7 @@ import { defineType, defineField } from 'sanity'
 /**
  * A published (or upcoming) book. Promoted out of the old generic `page`
  * document, where books lived as an embedded array keyed by the slug "books".
- * Mirrors the rich shape in data/books-data.json.
+ * Mirrors the rich shape of the legacy books page content.
  */
 export default defineType({
   name: 'book',

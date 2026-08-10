@@ -3,7 +3,9 @@
 import { useEffect, useRef } from 'react';
 
 interface TopVideoTemplateProps {
-  videoSrc: string;
+  /** Omit to render only the fade gradients over whatever sits behind
+      (e.g. a static hero image supplied by the page). */
+  videoSrc?: string;
   className?: string;
   /** Adds a slow continuous zoom (Ken Burns) loop to the background video. */
   kenburns?: boolean;
@@ -23,26 +25,28 @@ export function TopVideoTemplate({ videoSrc, className = '', kenburns = false }:
   return (
     <>
       {/* Video Background */}
-      <video
-        ref={videoRef}
-        className={`absolute inset-0 w-full h-full object-cover ${kenburns ? 'animate-kenburns' : ''} ${className}`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: 0,
-        }}
-      >
-        <source src={videoSrc} type="video/mp4" />
-      </video>
+      {videoSrc && (
+        <video
+          ref={videoRef}
+          className={`absolute inset-0 w-full h-full object-cover ${kenburns ? 'animate-kenburns' : ''} ${className}`}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0,
+          }}
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      )}
 
       {/* Top fade gradient — blends into the page background color (tracks
           --paper via color-mix so it never goes stale when the palette changes) */}
